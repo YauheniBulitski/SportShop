@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="header">
+    <div sec:authorize="isAnonymous()">
+       <span th:text="#{info.text}"></span>
+    </div>
+    <a th:href="@{/shop}"><span th:text="#{info.back}"></span></a>
+    <a sec:authorize="isAnonymous()" th:href="@{/registration}"> <span th:text="#{info.registration}"></span></a>
+    <a sec:authorize="isAnonymous()" th:href="@{/login}"><span th:text="#{info.sing_in}"></span></a>
+    <a sec:authorize ="hasAnyAuthority('USER','ADMIN')" th:href="@{'/basket'}"><img width="35" height="20" th:src="@{/resources/images/basket.png}"/></a>
+    <a sec:authorize ="hasAuthority('USER')" th:href="@{'/user-page'}"><span th:text="#{info.user_account}"></span></a>
+    <a sec:authorize ="hasAuthority('ADMIN')" th:href="@{'/admin/admin-page'}"><span th:text="#{info.admin_account}"></span></a>
+    <form  sec:authorize ="hasAnyAuthority('USER','ADMIN')" th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<div th:fragment="language">
+    <a th:href="@{'/admin/edit?id=' + ${id}+ '&&language=en_US'}"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+    <a th:href="@{'/admin/edit?id=' + ${id}+ '&&language=ru_RU'}"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+</div>
+<header th:insert ="header :: header"></header>
+<span th:if="${id}==1">
+    <fieldset>
+        <legend th:text="#{add.product}"></legend>
+         <form th:action="@{/admin/edit-product}" method="post" th:object="${productDto}">
+            <label  th:for="name" th:text="#{add.product_name}"></label></br>
+                <input th:field="*{name}" required type="text">
+             <span th:each="err : ${#fields.errors('name')}" th:text="#{${err}}" style="color: red">Error</span>
+            </br></br>
+             <label th:for="price" th:text="#{add.product_price}"></label></br>
+                 <input th:field="*{price}" required type="number" placeholder="1.00" step="0.01">
+              <span th:each="err : ${#fields.errors('price')}" th:text="#{${err}}" style="color: red">Error</span>
+            </br>
+             </br>
+             <label th:for="describe" th:text="#{add.product_describe}"></label></br>
+                 <input th:field="*{describe}" required type="text">
+              <span th:each="err : ${#fields.errors('describe')}" th:text="#{${err}}" style="color: red">Error</span>
+            </br>
+             </br>
+             <label th:for="count" th:text="#{add.product_count}"></label></br>
+                 <input th:field="*{count}" required type="number" >
+             <span th:each="err : ${#fields.errors('count')}" th:text="#{${err}}" style="color: red">Error</span>
+            </br>
+             </br>
+             <label th:for="type_id" th:text="#{add.type_id}"></label></br>
+                 <input th:field="*{type_id}" required type="number">
+             <span th:each="err : ${#fields.errors('type_id')}" th:text="#{${err}}" style="color: red">Error</span>
+          </br>
+             </br>
+             <label th:for="maker_id" th:text="#{add.maker_id}"></label></br>
+                 <input th:field="*{maker_id}" required type="number">
+              <span th:each="err : ${#fields.errors('maker_id')}" th:text="#{${err}}" style="color: red">Error</span>
+            </br></br>
+             <td>
+                <input type="submit" th:value="#{add.save}">
+            </td>
+        </form>
+    </fieldset>
+</span>
+<span th:if="${id}==3">
+    <fieldset>
+        <legend th:text="#{update.product_price}"></legend>
+         <form charset="UTF-8" th:action="@{/admin/update-price}" th:method="post">
+             <label th:text="#{admin.enter_id_product}"></label></br>
+                <input id="id" type="number" name="id"/>
+            </br>
+             </br>
+             <label th:text="#{add.product_price}"></label></br>
+                 <input id="price" required type="number" placeholder="1.00" step="0.01" name="price"/>
+            </br>
+             </br>
+             <td>
+                <button th:type="submit" ><span th:text="#{admin.update}"></span></button>
+            </td>
+        </form>
+    </fieldset>
+</span>
+<span th:if="${id}==4">
+    <fieldset>
+        <legend th:text="#{admin.update_status}"></legend>
+         <form charset="UTF-8" th:action="@{/admin/update-status}" th:method="post">
+             <label th:text="#{admin.enter_id_order}"></label></br>
+                <input id="id" required type="number" name="id"/>
+            </br>
+             </br>
+             <select class="form-control" id="status" name="status">
+                <option th:value="NOT_PAID" th:text="NOT_PAID">Не оплачен</option>
+                <option th:value="PAID" th:text="PAID">Оплачен(Доставлен)</option>
+                 </option>
+            </select></br>
+             </br>
+             <td>
+                 <button th:type="submit"><span th:text="#{admin.edit_status}"></span></button>
+            </td>
+        </form>
+    </fieldset>
+</span>
+<span th:if="${id}==5">
+    <fieldset>
+        <legend>Удалить заказ</legend>
+         <form charset="UTF-8" th:action="@{/admin/dell-orders}" th:method="post">
+            <label>Введите id заказа:</br>
+                <input id="id" required type="number" name="id"/>
+            </label></br>
+             </br>
+             <td>
+                <button th:type="submit">Удалить заказ</button>
+            </td>
+        </form>
+    </fieldset>
+</span>
+</body>
+</html>

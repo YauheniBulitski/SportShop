@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products for order</title>
+</head>
+<body>
+<header th:insert ="header :: header"></header>
+<div>
+     <span th:if="${products.size()}==0">
+    <span th:text="#{product.missing}"></span><br/>
+        <span th:if="${pageNo}>0">
+            <a th:href="@{'/admin/list-product?order='+${order}+'&&pageNo=' +${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></span></a>
+    </span>
+        </span>
+    <span th:if="${products.size()}!=0">
+         <optional th:each="product : ${products}">
+             <fieldset>
+         <form>
+             <span th:text="#{product.id}"></span> <td th:text="${product.id}">name</td><br/>
+            <span th:text="#{product.name}"></span> <td th:text="${product.name}">name</td><br/>
+            <span th:text="#{product.price}"></span> <td th:text="${product.price}">price</td><br/>
+         </form>
+        </fieldset>
+         </optional>
+         <span th:if="${pageNo}>0">
+        <a th:href="@{'/admin/list-product?order='+${order}+'&&pageNo=' +${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+         </span>
+        <span th:if="${pageNo}>=0">
+         <a th:href="@{'/admin/list-product?order='+${order}+'&&pageNo=' +${pageNo+1}} "><img width="65" height="20" th:src="@{/resources/images/left.jpg}"/></a>
+        </span>
+    </span>
+</div>
+</body>
+</html>

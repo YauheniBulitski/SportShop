@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+<div th:fragment="language">
+    <a th:href="@{'/product-type?typeId=' + ${typeId} +'&pageNo=' +${pageNo}+ '&&language=en_US'}"> <img width="35" height="20" th:src="@{/resources/images/en.jpg}"/> </a>
+    <a th:href="@{'/product-type?typeId=' + ${typeId} +'&pageNo=' +${pageNo}+ '&&language=ru_RU'}"> <img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/> </a>
+</div>
+<header th:insert ="header :: header"></header>
+<div>
+    <span th:if="${products.size()}==0">
+    <span th:text="#{product.missing}"></span><br/>
+        <span th:if="${pageNo}>0">
+            <a th:href="@{'/product-type?typeId=' + ${typeId}+'&pageNo=' +${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+    </span>
+        </span>
+    <span th:if="${products.size()}!=0">
+         <optional th:each="product : ${products}">
+             <fieldset>
+         <form th:action="@{/addInBasket}" th:method="post">
+             <span th:text="#{product.name}"></span> <td th:text="${product.name}">name</td><br/>
+            <span th:text="#{product.producer}"></span> <td th:text="${product.maker.name}">author</td><br/>
+            <span th:text="#{product.price}"></span> <td th:text="${product.price}">price</td><br/>
+           <span th:text="#{product.description}"></span> <td th:text="${product.description}">describe</td><br/>
+            <span th:text="#{product.stock}"></span> <td th:text="${product.count}">count</td><br/>
+         <span sec:authorize="hasAnyAuthority('USER','ADMIN')">
+               <button name="product" th:type="submit" th:value="${product.id}"><span th:text="#{add.cart}"></span></button>
+         </span>
+         </form>
+        </fieldset>
+         </optional>
+         <span th:if="${pageNo}>0">
+        <a th:href="@{'/product-type?typeId=' + ${typeId}+'&pageNo=' +${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+         </span>
+        <span th:if="${pageNo}>=0">
+         <a th:href="@{'/product-type?typeId=' + ${typeId}+'&pageNo=' +${pageNo+1}} "><img width="65" height="20" th:src="@{/resources/images/left.jpg}"/></a>
+        </span>
+    </span>
+</div>
+</body>
+</html>

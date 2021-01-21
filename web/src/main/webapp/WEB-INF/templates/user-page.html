@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Кабинет пользователя</title>
+</head>
+<body>
+<div th:fragment="language">
+    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+</div>
+<header th:insert ="header :: header"></header>
+<fieldset>
+    <legend th:text="#{user.page}"></legend>
+    <span th:text="#{registration.name}"></span> <td th:text="${user.user_name}"></td><br/>
+    <span th:text="#{order.phone}"></span> <td th:text="${user.phone_number}"> </td><br/>
+    <fieldset>
+        <legend th:text="#{user.order_info}"> </legend>
+    <optional th:each="order : ${orders}">
+        <fieldset>
+            <legend th:text="#{user.number_order}"> <td th:text="${order.id}">id</td></legend>
+        <span th:text="#{user.order_time}"></span> <td th:text="${order.localDateTime}">data</td><br/>
+        <span th:text="#{order.sum}"></span> <td th:text="${order.price}">price</td><br/>
+        <span th:text="#{order.type_pay}"></span> <td th:text="${order.type_of_payment}">type_of_payment</td><br/>
+            </fieldset>
+    </optional>
+    </fieldset>
+</fieldset>
+</body>
+</html>

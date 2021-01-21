@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<div th:fragment="language">
+    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+</div>
+<header th:insert ="header :: header"></header>
+<fieldset>
+    <legend  th:text="#{admin.admin}">Администратор</legend>
+     <span th:text="#{admin.name}"></span><td th:text="${user.user_name}">Имя</td><br/>
+    </fieldset>
+<fieldset>
+    <legend th:text="#{admin.menu}">Меню редактирования</legend>
+    <fieldset>
+        <legend th:tetxt="#{admin.edit_user}"></legend>
+        <a th:href="@{'/admin/view-users'}"><span th:text="#{view.users}"></span></a></br>
+    </fieldset>
+    <fieldset>
+        <legend th:text="#{admin.edit_prod}">Редактивание товара</legend>
+        <a th:href="@{'/admin/view-product'}"><span th:text="#{view.product}"></span></a></br>
+        <a th:href="@{'/admin/edit?id='+1}"><span th:text="#{add.product}"></span></a></br>
+        <a th:href="@{'/admin/edit?id='+3}"><span th:text="#{edit.product}"></span></a></br>
+    </fieldset>
+    <fieldset>
+        <legend th:text="#{admin.edit_order}">Редактивание заказа</legend>
+        <a th:href="@{'/admin/view-orders'}"><span th:text="#{view.orders}"></span></a></br>
+        <a th:href="@{'/admin/edit?id='+4}"><span th:text="#{edit.order_status}"></span></a></br>
+        <a th:href="@{'/admin/edit?id='+5}"><span th:text="#{delete.order}"></span></a></br>
+    </fieldset>
+</fieldset>
+</body>
+</html>

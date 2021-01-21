@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SportShop</title>
+</head>
+<body>
+<h1><span th:text="#{shop.name}"></span></h1>
+<div th:fragment="language">
+    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+</div>
+<header th:insert ="header :: header"></header>
+<fieldset>
+    <legend th:text="#{search.name}">Поиск</legend>
+    <form th:action="@{/find-product}" method="get">
+        <label><span th:text="#{search.enter}"></span></br>
+            <input id="name" required type="text" name="name"/>
+        </label></br></br>
+        <td>
+            <button type="submit" th:value="Find"><span th:text="#{search.find}"></span></button>
+        </td>
+    </form>
+</fieldset>
+<fieldset>
+    <legend th:text="#{product.categories}">Категории:</legend>
+    <tr th:each="category : ${categories}">
+        <a th:href="@{'/type?categoryId=' + ${category.id}} "> <td th:text="${category.name}"/></a><br/>
+    </tr>
+</fieldset>
+</div>
+</body>
+</html>

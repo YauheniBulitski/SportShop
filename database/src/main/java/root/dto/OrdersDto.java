@@ -1,0 +1,15 @@
+package root.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrdersDto {
+
+    private  String type_of_payment;
+}

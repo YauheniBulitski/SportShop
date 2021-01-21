@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<span th:if="${orders.size()}==0">
+    <span th:text="#{orders.missing}"></span><br/>
+        <span th:if="${pageNo}>0">
+            <a th:href="@{'/admin/view-orders?pageNo=' +${pageNo-1}} "><img width="65" height="20"
+                                                                            th:src="@{/resources/images/right.jpg}"/></a>
+    </span>
+        </span>
+<span th:if="${orders.size()}!=0">
+         <optional th:each="order : ${orders}">
+             <fieldset>
+         <form th:action="@{/admin/list-product}" method="get">
+            id :  <td th:text="${order.id}">id</td><br/>
+           <span th:text="#{user.order_time}"></span> <td th:text="${order.localDateTime}">localDateTime</td><br/>
+            <span th:text="#{order.sum}"></span> <td th:text="${order.price}">price</td><br/>
+             <span th:text="#{order.type_pay}"></span> <td th:text="${order.type_of_payment}">type_of_payment</td><br/>
+             <span th:text="#{order.status}"></span> <td th:text="${order.status}">status</td><br/>
+           <span th:text="#{user.id}"></span> <td th:text="${order.user.id}">user_id</td><br/>
+            <span th:text="#{registration.name}"></span> <td th:text="${order.user.user_name}">user_name</td><br/>
+            <span th:text="#{user.phone}"></span> <td th:text="${order.user.phone_number}">user_id</td><br/>
+             <td>
+            <button name="order" th:type="submit" th:value="${order.id}"><span
+                    th:text="#{product.show}"></span></button>
+        </td>
+         </form>
+        </fieldset>
+         </optional>
+         <span th:if="${pageNo}>0">
+        <a th:href="@{'/admin/view-orders?pageNo=' +${pageNo-1}} "><img width="65" height="20"
+                                                                        th:src="@{/resources/images/right.jpg}"/></a>
+         </span>
+        <span th:if="${pageNo}>=0">
+         <a th:href="@{'/admin/view-orders?pageNo=' +${pageNo+1}} "><img width="65" height="20"
+                                                                         th:src="@{/resources/images/left.jpg}"/></a>
+        </span>
+    </span>
+</body>
+</html>

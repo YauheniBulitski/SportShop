@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="language">
+<a th:href="@{'/type?categoryId=' + ${categoryId}} + '&&language=en_US'"> <img width="35" height="20" th:src="@{/resources/images/en.jpg}"/> </a>
+<a th:href="@{'/type?categoryId=' + ${categoryId}} + '&&language=ru_RU'"> <img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/> </a>
+</div>
+<header th:insert ="header :: header"></header>
+<span th:if="${types.size()}==0">
+   <span th:text="#{product.missing}"></span><br/>
+</span>
+<span th:if="${types.size()}!=0">
+<fieldset>
+    <legend th:text="#{products.type}"></legend>
+    <tr th:each="type : ${types}">
+        <a th:href="@{'/product-type?typeId=' + ${type.id}} "> <td th:text="${type.name}"/></a><br/>
+    </tr>
+</fieldset>
+</span>
+</body>
+</html>
