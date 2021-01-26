@@ -22,16 +22,19 @@ public class OrdersItemService {
     private final OrdersItemRepository ordersItemRepository;
     private final UserServiceImpl userServiceImpl;
     private final ProductService productService;
+    private final CountService countService;
 
     @Autowired
     public OrdersItemService(OrdersService ordersService,
                              OrdersItemRepository ordersItemRepository,
                              UserServiceImpl userServiceImpl,
-                             ProductService productService) {
+                             ProductService productService,
+                             CountService countService) {
         this.ordersService = ordersService;
         this.ordersItemRepository = ordersItemRepository;
         this.userServiceImpl = userServiceImpl;
         this.productService = productService;
+        this.countService = countService;
     }
 
     @Transactional
@@ -43,12 +46,15 @@ public class OrdersItemService {
     public void saveOrderItemWithOrders(User user, Orders order) {
         List<Product> products = user.getProducts();
         for (Product p : products) {
-            OrdersItem oi = OrdersItem.builder()
-                    .product(p)
-                    .order(order)
-                    .price(p.getPrice())
-                    .build();
-            save(oi);
+            int count=countService.decrementProduct(p);
+            if(count>0) {
+                OrdersItem oi = OrdersItem.builder()
+                        .product(p)
+                        .order(order)
+                        .price(p.getPrice())
+                        .build();
+                save(oi);
+            }
         }
         userServiceImpl.dellAllProductOfBasket(user);
         ordersService.updatePrice(order);
@@ -69,7 +75,7 @@ public class OrdersItemService {
         if (order.getStatus().equals("NOT_PAID")) {
             List<Product> list = findAllProductId(order);
             for (Product p : list) {
-                productService.incrementProduct(p);
+               countService.incrementProduct(p);
             }
         }
         ordersService.dellById(id);

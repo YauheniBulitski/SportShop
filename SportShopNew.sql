@@ -18,7 +18,8 @@ CREATE TABLE users
 CREATE TABLE country
 (
     id   SERIAL PRIMARY KEY,
-    name CHARACTER VARYING(128) NOT NULL
+    name CHARACTER VARYING(128) NOT NULL,
+    abbreviation CHARACTER VARYING(32) NOT NULL
 );
 
 CREATE TABLE maker
@@ -47,9 +48,15 @@ CREATE TABLE product
     name        CHARACTER VARYING(256) NOT NULL,
     price       numeric(7, 2)          NOT NULL,
     description CHARACTER VARYING(560),
-    count       INTEGER,
     type_id     INTEGER               NOT NULL REFERENCES type (id),
     maker_id    INTEGER               NOT NULL REFERENCES maker (id)
+);
+
+CREATE TABLE count
+(
+    id          BIGSERIAL PRIMARY KEY,
+    count       INTEGER NOT NULL,
+    product_id     INTEGER               NOT NULL REFERENCES product (id)
 );
 
 CREATE TABLE users_product

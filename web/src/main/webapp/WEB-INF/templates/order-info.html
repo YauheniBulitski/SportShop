@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <script src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/js/info.js"></script>
+
     <title>Информация о заказе</title>
 </head>
 <body>
@@ -20,11 +23,17 @@
     </optional>
     <form th:action="@{/orders}" method="post">
         </br>
-        <select class="form-control" id="type_of_payment" name="type_of_payment">
-            <option th:value="CASH" th:text="#{type.payment_one}">Select task for disable</option>
-            <option th:value="CARD" th:text="#{type.payment_two}"></option>
+        <select id="type_of_payment" name="type_of_payment" class="form-control" aria-required="true">
+            <option value="CASH" th:text="#{type.payment_one}">Select task for disable</option>
+            <option value="CARD" th:text="#{type.payment_two}"></option>
             </option>
         </select></br>
+        <div id="cash" style="display:none;">
+               Первый
+        </div>
+        <div id="card" style="display:none;">
+               Второй
+        </div>
         </br>
         <td>
             <button type="submit">Сделать заказ</button>

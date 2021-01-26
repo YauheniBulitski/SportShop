@@ -27,7 +27,7 @@ public class Orders extends BaseEntity<Long> {
     private BigDecimal price;
 
     @Column(name = "type_of_payment", nullable = false)
-    private String type_of_payment;
+    private String typeOfPayment;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -37,6 +37,6 @@ public class Orders extends BaseEntity<Long> {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
-    private List<OrdersItem> orders_item = new ArrayList<>();
+    private List<OrdersItem> ordersItem;
 
 }

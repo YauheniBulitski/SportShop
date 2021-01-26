@@ -20,14 +20,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final MakerService makerService;
     private final TypeService typeService;
+    private final CountService countService;
 
     @Autowired
     public ProductService(ProductRepository productRepository,
                           MakerService makerService,
-                          TypeService typeService) {
+                          TypeService typeService,
+                          CountService countService) {
         this.productRepository = productRepository;
         this.makerService = makerService;
         this.typeService = typeService;
+        this.countService = countService;
     }
 
     @Transactional
@@ -54,33 +57,21 @@ public class ProductService {
         return products;
     }
 
-    @Transactional
-    public void incrementProduct(Product product) {
-        int count = productRepository.findById(product.getId()).get().getCount() + 1;
-        productRepository.updateProductCount(count, product.getId());
-    }
-
-    @Transactional
-    public void decrementProduct(Product product) {
-        int count = product.getCount() - 1;
-        productRepository.updateProductCount(count, product.getId());
-    }
-
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
 
     @Transactional
     public Product saveProduct(ProductDto productDto) {
-        Product product = Product.builder()
+        Product product = save(Product.builder()
                 .name(productDto.getName())
-                .count(productDto.getCount())
                 .description(productDto.getDescribe())
                 .price(BigDecimal.valueOf(productDto.getPrice()))
                 .maker(makerService.findById(productDto.getMaker_id()))
                 .type(typeService.findById(productDto.getType_id()))
-                .build();
-        return save(product);
+                .build());
+        countService.save(productDto.getCount(),product);
+        return product ;
     }
 
     @Transactional

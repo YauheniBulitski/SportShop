@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import root.dto.OrdersDto;
 import root.entity.Orders;
-import root.entity.Product;
 import root.entity.User;
 import root.repository.OrdersItemRepository;
 import root.repository.OrdersRepository;
@@ -41,7 +40,7 @@ public class OrdersService {
         Orders orders = Orders.builder()
                 .localDateTime(LocalDateTime.now())
                 .status("NOT_PAID")
-                .type_of_payment(ordersDto.getType_of_payment())
+                .typeOfPayment(ordersDto.getType_of_payment())
                 .user(user)
                 .build();
         return ordersRepository.save(orders);

@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(of="id")
-@ToString(exclude = {"users","type","maker","orders_item"})
+@EqualsAndHashCode(of = "id")
+@ToString(exclude = {"users", "type", "maker", "ordersItem"})
 @Builder
 @Getter
 @Setter
@@ -19,17 +19,17 @@ import java.util.List;
 @Table(name = "product")
 public class Product extends BaseEntity<Long> {
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "price",nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @Column(name = "description",nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "count",nullable = false)
-    private Integer count;
+    @OneToOne(mappedBy = "product")
+    private Count count;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -39,12 +39,12 @@ public class Product extends BaseEntity<Long> {
     @JoinColumn(name = "maker_id")
     private Maker maker;
 
-    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<OrdersItem> orders_item = new ArrayList<>();
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<OrdersItem> ordersItem;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "users_product",
-    joinColumns = @JoinColumn(name = "product_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users=new ArrayList<>();
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 }

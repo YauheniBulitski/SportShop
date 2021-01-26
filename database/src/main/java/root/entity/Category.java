@@ -22,5 +22,5 @@ public class Category extends BaseEntity<Integer> {
     private String name;
 
     @OneToMany(mappedBy = "category",fetch=FetchType.EAGER)
-    private List<Type> types= new ArrayList<>();
+    private List<Type> types;
 }

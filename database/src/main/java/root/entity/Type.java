@@ -20,7 +20,7 @@ public class Type extends BaseEntity<Integer> {
     private String name;
 
     @OneToMany(mappedBy = "type",fetch=FetchType.EAGER)
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

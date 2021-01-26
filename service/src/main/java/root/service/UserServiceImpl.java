@@ -69,7 +69,6 @@ public class UserServiceImpl implements UserService {
         User userOne = userRepository.findById(id).orElse(null);
         Product product = productService.findById(productId).orElse(null);
         if (userOne != null && product != null) {
-            productService.decrementProduct(product);
             userOne.getProducts().add(product);
         }
     }
@@ -80,7 +79,6 @@ public class UserServiceImpl implements UserService {
         Product product = productService.findById(productId).orElse(null);
         if (user != null && product != null) {
             user.getProducts().remove(product);
-            productService.incrementProduct(product);
         }
     }
 

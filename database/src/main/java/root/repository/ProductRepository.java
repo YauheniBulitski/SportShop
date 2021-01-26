@@ -26,10 +26,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     Optional<Product> findById(Long id);
 
-    @Modifying
-    @Query("update Product p set p.count=:count where p.id=:id")
-    public void updateProductCount(@Param("count") int count, @Param("id") Long id);
-
     @Query("select p from Product p where upper(p.name) like %:name%")
     public List<Product> findAllMatch(@Param("name") String name, Pageable pageable);
 

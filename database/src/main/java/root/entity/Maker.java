@@ -25,5 +25,5 @@ public class Maker extends BaseEntity<Integer> {
     private Country country;
 
     @OneToMany(mappedBy = "maker",fetch=FetchType.EAGER)
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 }

@@ -40,9 +40,9 @@ public class User extends BaseEntity<Long> {
     @JoinTable(name = "users_product",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
     @OneToMany(mappedBy = "user")
-    private List<Orders> orders = new ArrayList<>();
+    private List<Orders> orders;
 
 }
