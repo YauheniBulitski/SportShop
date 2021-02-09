@@ -69,4 +69,5 @@ public class ProductValidation implements CustomValidator<ProductDto> {
             errors.rejectValue("type_id", "27", "Тип с данным Id не существует");
         }
     }
+
 }

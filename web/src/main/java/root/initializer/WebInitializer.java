@@ -1,9 +1,9 @@
 package root.initializer;
 
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import root.config.PersistenceConfig;
 import root.config.WebConfig;
+
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

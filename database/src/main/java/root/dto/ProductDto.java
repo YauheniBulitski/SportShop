@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.validation.constraints.Max;
 
 
 @Data
@@ -13,10 +12,12 @@ import javax.validation.constraints.Max;
 @AllArgsConstructor
 public class ProductDto {
 
+    private Long id;
     private String name;
     private Double price;
     private String describe;
     private Integer count;
     private Integer maker_id;
     private Integer type_id;
+    private String url;
 }

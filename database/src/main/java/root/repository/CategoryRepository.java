@@ -1,5 +1,6 @@
 package root.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import root.entity.Category;
@@ -15,5 +16,9 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
     List<Category> findAll();
 
     Optional<Category> findById(Integer id);
+
+    List<Category> findAll(Pageable pageable);
+
+    boolean existsById(Integer integer);
 
 }

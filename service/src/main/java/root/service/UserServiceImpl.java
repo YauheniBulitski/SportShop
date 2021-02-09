@@ -55,10 +55,10 @@ public class UserServiceImpl implements UserService {
 
     public User saveUser(UserDto userDto) {
         User user = User.builder()
-                .user_name(userDto.getUser_name())
-                .name(userDto.getLogin_name())
+                .userName(userDto.getUserName())
+                .name(userDto.getLoginName())
                 .password(passwordEncoder.encode(userDto.getPassword()))
-                .phone_number(userDto.getPhone_number())
+                .phoneNumber(userDto.getPhoneNumber())
                 .role(roleService.findByName("USER"))
                 .build();
         return save(user);
@@ -112,4 +112,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
+    @Transactional
+    public void updateUser(UserDto userDto) {
+        User user = findById(userDto.getId()).orElse(null);
+        if (user!=null) {
+            if (!userDto.getUserName().equals("")) {
+                user.setUserName(userDto.getUserName());
+            }
+            if (!userDto.getPhoneNumber().equals("")) {
+                user.setPhoneNumber(userDto.getPhoneNumber());
+            }
+            if (!userDto.getRole().equals("")) {
+               user.setRole(roleService.findByName(userDto.getRole()));
+            }
+            save(user);
+        }
+    }
 }

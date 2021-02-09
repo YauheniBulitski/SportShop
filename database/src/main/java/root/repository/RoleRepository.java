@@ -12,4 +12,5 @@ public interface RoleRepository extends CrudRepository<Role, Short> {
     Role save(Role role);
 
     Optional<Role> findByName(String name);
+
 }

@@ -49,17 +49,17 @@ public class BaseHelper {
         Role userRole = roleService.save(Role.builder().name("USER").build());
 
         User user = userService.save(User.builder()
-                .user_name("Vasya")
+                .userName("Vasya")
                 .name("User")
                 .password(passwordEncoder.encode("2222"))
-                .phone_number("+375291234567")
+                .phoneNumber("+375291234567")
                 .role(userRole)
                 .build());
         User admin = userService.save(User.builder()
-                .user_name("Petya")
+                .userName("Petya")
                 .name("Admin")
                 .password(passwordEncoder.encode("1111"))
-                .phone_number("+375297654321")
+                .phoneNumber("+375297654321")
                 .role(adminRole)
                 .build());
 
@@ -103,6 +103,7 @@ public class BaseHelper {
                 .description("Trec Nutrition Booster Whey Protein – полноценная и невероятно вкусная белковая подпитка ваших мышц!" +
                         " Ценители поистине вкусных, насыщенных и питательных протеиновых коктейлей с густой текстурой будут в восторге")
 //                        " когда попробуют великолепный белковый шейк Booster Whey Protein, представленный компанией Trec Nutrition.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(54, p1);
 
@@ -113,6 +114,7 @@ public class BaseHelper {
                         " протеина с продолжительным сроком усваивания. Продукт обеспечивает многочасовое снабжение мышц всеми необходимыми аминокислотами")
 //                        " в том числе в большом количестве ВСАА и L-глютамин. CASEIN 100 защищает от ночного и посттренировочного катаболизма, стимулируя регенерацию " +
 //                        "и развитие мышечной ткани.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(25, p2);
 
@@ -122,6 +124,7 @@ public class BaseHelper {
                         "основе легкоусвояемого концентрата сывороточного белка. Whey 100 способен стимулировать процесс анаболизма")
 //                        " нагрузках приводит к гипертрофии мышечной массы, к которой стремится каждый атлет. Также продукт подойдет людям, которые стремятся повысить" +
 //                        " содержание белка в ежедневном рационе вне зависимости от физических нагрузок.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(45, p3);
 
@@ -130,6 +133,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(30.75)).maker(trec).type(protein)
                 .description("Soy Protein Isolate помогает поддерживать мышечную ткань, способствуя развитию спортивной фигуры. Продукт рекомендуется в качестве белковой" +
                         " добавки для применения в ежедневном рационе питания физически активных людей.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(85, p4);
 
@@ -138,6 +142,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(20.75)).maker(trec).type(protein)
                 .description("Soy Protein Isolate помогает поддерживать мышечную ткань, способствуя развитию спортивной фигуры. Продукт рекомендуется в качестве белковой" +
                         " добавки для применения в ежедневном рационе питания физически активных людей.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(25, p5);
 
@@ -146,6 +151,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(24.75)).maker(trec).type(protein)
                 .description("Soy Protein Isolate помогает поддерживать мышечную ткань, способствуя развитию спортивной фигуры. Продукт рекомендуется в качестве белковой" +
                         " добавки для применения в ежедневном рационе питания физически активных людей.")
+                .url("/resources/images/prot.jpg")
                 .build());
         countService.save(15, p6);
 
@@ -155,6 +161,7 @@ public class BaseHelper {
                 .description("Превосходные вкусовые характеристики, отличное сочетание незаменимых и заменимых аминокислот, простые и комплексные углеводы, а также " +
                         "высококачественный, отборный концентрат белковой сыворотки выгодно отличают SOLID MASS")
 //                        "специализированного спортивного питания.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(34, p7);
 
@@ -164,6 +171,7 @@ public class BaseHelper {
                 .description("Превосходные вкусовые характеристики, отличное сочетание незаменимых и заменимых аминокислот, простые и комплексные углеводы, а также " +
                         "высококачественный, отборный концентрат белковой сыворотки выгодно отличают SOLID MASS  ")
 //                        "специализированного спортивного питания.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(44, p8);
 
@@ -172,6 +180,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(15.68)).maker(strimex).type(gainer)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(36, p9);
 
@@ -180,6 +189,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(50.05)).maker(strimex).type(gainer)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(42, p10);
 
@@ -188,6 +198,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(20.70)).maker(strimex).type(gainer)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(12, p11);
 
@@ -196,6 +207,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(60.50)).maker(strimex).type(gainer)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/gein.jpg")
                 .build());
         countService.save(25, p12);
 
@@ -204,6 +216,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(60.50)).maker(trec).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p13);
 
@@ -212,6 +225,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(10.50)).maker(trec).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p14);
 
@@ -220,6 +234,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(18.20)).maker(trec).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p15);
 
@@ -228,6 +243,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(24.60)).maker(trec).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p16);
 
@@ -236,6 +252,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(28.90)).maker(trec).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p17);
 
@@ -244,6 +261,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(6.50)).maker(strimex).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p18);
 
@@ -252,6 +270,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(10.20)).maker(strimex).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p19);
 
@@ -260,6 +279,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(14.60)).maker(strimex).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p20);
 
@@ -268,6 +288,7 @@ public class BaseHelper {
                 .price(BigDecimal.valueOf(18.90)).maker(strimex).type(creatine)
                 .description("Hard Gain Silver Edition от Strimex выделяется среди других гейнеров благодаря списку заменимых аминокислот.  Сложные углеводы ответственны" +
                         " за постепенную загрузку энергии в мускулы. Таким образом, жировые клетки питаются меньше.")
+                .url("/resources/images/creat.jpg")
                 .build());
         countService.save(25, p21);
 
@@ -278,6 +299,7 @@ public class BaseHelper {
                         "Упражнения:жим штанги, различные упражнения с гантелями\n" +
                         "Рама:устойчивая, с однослойной покраской (38*38*1.5 мм.)\n" +
                         "Нагрузка на стойки для штанги 100 кг.")
+                .url("/resources/images/skam.jpg")
                 .build());
         countService.save(8, p22);
 
@@ -289,6 +311,7 @@ public class BaseHelper {
                         "Рама:устойчивая, с однослойной покраской (50*50мм)\n" +
                         "Допустимая суммарная нагрузка:200 кг.\n" +
                         "Сидение:комфортабельное 120*27см (толщина 40 мм.)")
+                .url("/resources/images/skam.jpg")
                 .build());
         countService.save(9, p23);
 
@@ -300,6 +323,7 @@ public class BaseHelper {
                         "Рама:устойчивая, с однослойной покраской (50*50мм)\n" +
                         "Допустимая суммарная нагрузка:150 кг.\n" +
                         "Сидение:комфортабельное 120*27см (толщина 40 мм.)")
+                .url("/resources/images/skam.jpg")
                 .build());
         countService.save(19, p24);
 
@@ -311,6 +335,7 @@ public class BaseHelper {
                         "Рама:устойчивая, с однослойной покраской (50*50)\n" +
                         "Нагрузка на парту:100 кг.\n" +
                         "Сидение:комфортабельное (40 мм.)\n")
+                .url("/resources/images/skam.jpg")
                 .build());
         countService.save(9, p25);
 
@@ -322,6 +347,7 @@ public class BaseHelper {
                         "Рама:устойчивая, с однослойной покраской (50*50)\n" +
                         "Нагрузка на парту:190 кг.\n" +
                         "Сидение:комфортабельное (40 мм.)\n")
+                .url("/resources/images/skam.jpg")
                 .build());
         countService.save(25, p26);
 
@@ -333,6 +359,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:21\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(25, p27);
 
@@ -344,6 +371,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:16\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(10, p28);
 
@@ -355,6 +383,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:16\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(15, p29);
 
@@ -366,6 +395,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:16\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(15, p30);
 
@@ -377,6 +407,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:16\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(15, p31);
 
@@ -388,6 +419,7 @@ public class BaseHelper {
                         "Регулировка нагрузки:Механическая 8 уровней\n" +
                         "Размеры в рабочем состоянии (дл х шир х выс), см:100x49x125\n" +
                         "Вес, кг:16\n")
+                .url("/resources/images/vel.jpg")
                 .build());
         countService.save(15, p32);
 
@@ -399,6 +431,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p33);
 
@@ -410,6 +443,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p34);
 
@@ -421,6 +455,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p35);
 
@@ -432,6 +467,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p36);
 
@@ -443,6 +479,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p37);
 
@@ -454,6 +491,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(15, p38);
 
@@ -465,6 +503,7 @@ public class BaseHelper {
                         "Толщина деки:16 мм\n" +
                         "Размеры в сложенном состоянии (дл х шир х выс), см:900х640х1400 мм.\n" +
                         "Максимальный вес пользователя:100 кг")
+                .url("/resources/images/beg.jpg")
                 .build());
         countService.save(55, p39);
 

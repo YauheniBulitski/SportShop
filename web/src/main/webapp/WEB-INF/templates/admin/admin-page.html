@@ -1,37 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/security">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/shop.css">
     <title>Admin</title>
 </head>
 <body>
-<div th:fragment="language">
-    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
-    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+<div class="row">
+    <div th:fragment="language" class="col-md-2 offset-1">
+        <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+        <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+    </div>
+    <div class="col-md-2 offset-7">
+        <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
+        <form th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}" class="btn btn-danger">
+        </form>
+    </div>
 </div>
-<header th:insert ="header :: header"></header>
-<fieldset>
-    <legend  th:text="#{admin.admin}">Администратор</legend>
-     <span th:text="#{admin.name}"></span><td th:text="${user.user_name}">Имя</td><br/>
-    </fieldset>
-<fieldset>
-    <legend th:text="#{admin.menu}">Меню редактирования</legend>
-    <fieldset>
-        <legend th:tetxt="#{admin.edit_user}"></legend>
-        <a th:href="@{'/admin/view-users'}"><span th:text="#{view.users}"></span></a></br>
-    </fieldset>
-    <fieldset>
-        <legend th:text="#{admin.edit_prod}">Редактивание товара</legend>
-        <a th:href="@{'/admin/view-product'}"><span th:text="#{view.product}"></span></a></br>
-        <a th:href="@{'/admin/edit?id='+1}"><span th:text="#{add.product}"></span></a></br>
-        <a th:href="@{'/admin/edit?id='+3}"><span th:text="#{edit.product}"></span></a></br>
-    </fieldset>
-    <fieldset>
-        <legend th:text="#{admin.edit_order}">Редактивание заказа</legend>
-        <a th:href="@{'/admin/view-orders'}"><span th:text="#{view.orders}"></span></a></br>
-        <a th:href="@{'/admin/edit?id='+4}"><span th:text="#{edit.order_status}"></span></a></br>
-        <a th:href="@{'/admin/edit?id='+5}"><span th:text="#{delete.order}"></span></a></br>
-    </fieldset>
-</fieldset>
+
+<div class="col-md-6 offset-3 text-center">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-primary">
+            <legend th:text="#{admin.admin}"></legend>
+        </a>
+        <a class="list-group-item list-group-item-success">
+            <span th:text="#{registration.name}"></span>
+            <td th:text="${user.userName}"></td>
+            <br/>
+        </a>
+    </div>
+    </br>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group text-center">
+            <a class="list-group-item list-group-item-primary">
+                <legend th:text="#{admin.edit_user}"></legend>
+            </a>
+            <a th:href="@{'/admin/view-users'}" class="list-group-item list-group-item-success">
+                <td th:text="#{view.users}"></td>
+            </a>
+            <a th:href="@{'/admin/edit?id='+3}" class="list-group-item list-group-item-success">
+                <td th:text="#{update.users}"></td>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="list-group text-center">
+            <a class="list-group-item list-group-item-primary">
+                <legend th:text="#{admin.edit_prod}"></legend>
+            </a>
+            <a th:href="@{'/admin/view-product'}" class="list-group-item list-group-item-success">
+                <td th:text="#{view.product}"/>
+            </a>
+            <a th:href="@{'/admin/edit?id='+1}" class="list-group-item list-group-item-success">
+                <td th:text="#{add.product}"/>
+            </a>
+            <a th:href="@{'/admin/edit?id='+2}" class="list-group-item list-group-item-success">
+                <td th:text="#{edit.product}"/>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="list-group text-center">
+            <a class="list-group-item list-group-item-primary">
+                <legend th:text="#{admin.edit_order}"></legend>
+            </a>
+            <a th:href="@{'/admin/view-orders'}" class="list-group-item list-group-item-success">
+                <td th:text="#{view.orders}"/>
+            </a>
+            <a th:href="@{'/admin/edit?id='+4}" class="list-group-item list-group-item-success">
+                <td th:text="#{edit.order_status}"/>
+            </a>
+        </div>
+    </div>
+</div>
+</br></br>
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group text-center">
+            <a class="list-group-item list-group-item-primary">
+                <legend th:text="#{admin.edit_type}"></legend>
+            </a>
+            <a th:href="@{'/admin/view-type'}" class="list-group-item list-group-item-success">
+                <td th:text="#{view.type}"></td>
+            </a>
+            <a th:href="@{'/admin/edit?id='+5}" class="list-group-item list-group-item-success">
+                <td th:text="#{update.type}"></td>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="list-group text-center">
+            <a class="list-group-item list-group-item-primary">
+                <legend th:text="#{admin.edit_category}"></legend>
+            </a>
+            <a th:href="@{'/admin/view-category'}" class="list-group-item list-group-item-success">
+                <td th:text="#{view.category}"></td>
+            </a>
+            <a th:href="@{'/admin/edit?id='+6}" class="list-group-item list-group-item-success">
+                <td th:text="#{update.category}"></td>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

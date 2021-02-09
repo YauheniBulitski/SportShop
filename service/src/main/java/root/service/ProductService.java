@@ -69,14 +69,39 @@ public class ProductService {
                 .price(BigDecimal.valueOf(productDto.getPrice()))
                 .maker(makerService.findById(productDto.getMaker_id()))
                 .type(typeService.findById(productDto.getType_id()))
+                .url("/resources/images/" + (productDto.getUrl().equals("") ? "def" : productDto.getUrl()) + ".jpg")
                 .build());
-        countService.save(productDto.getCount(),product);
-        return product ;
+        countService.save(productDto.getCount(), product);
+        return product;
     }
 
     @Transactional
-    public void updatePrice(BigDecimal price, Long id) {
-        productRepository.updatePrice(price, id);
+    public Product updateProduct(ProductDto productDto) {
+        Product product = findById(productDto.getId()).get();
+
+        if (!productDto.getName().equals("")) {
+            product.setName(productDto.getName());
+        }
+        if (!productDto.getDescribe().equals("")) {
+            product.setDescription(productDto.getDescribe());
+        }
+        if (productDto.getCount() != null) {
+            countService.updateCount(productDto.getCount(), product);
+        }
+        if (productDto.getPrice() != null) {
+            product.setPrice(BigDecimal.valueOf(productDto.getPrice()));
+        }
+        if (productDto.getMaker_id() != null) {
+            product.setMaker(makerService.findById(productDto.getMaker_id()));
+        }
+        if (productDto.getType_id() != null) {
+            product.setType(typeService.findById(productDto.getType_id()));
+        }
+        if (!productDto.getUrl().equals("")) {
+            product.setUrl("/resources/images/" + productDto.getUrl() + ".jpg");
+        }
+        return save(product);
     }
+
 
 }

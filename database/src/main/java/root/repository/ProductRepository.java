@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import root.entity.Product;
-import root.entity.User;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,14 +21,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     List<Product> findAll(Pageable pageable);
 
-    List<Product> findByUsers(User user);
-
     Optional<Product> findById(Long id);
 
     @Query("select p from Product p where upper(p.name) like %:name%")
-    public List<Product> findAllMatch(@Param("name") String name, Pageable pageable);
+    List<Product> findAllMatch(@Param("name") String name, Pageable pageable);
 
     @Modifying
     @Query("update Product p set p.price=:price where p.id=:id")
-    public void updatePrice(@Param("price") BigDecimal price, @Param("id") Long id);
+    void updatePrice(@Param("price") BigDecimal price, @Param("id") Long id);
 }

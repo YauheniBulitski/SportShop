@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/shop.css">
+    <title>Types</title>
+</head>
+<body>
+</br>
+<div class="row">
+    <div th:fragment="language" class="col-md-2 offset-1">
+        <a th:href="@{'/admin/view-type?pageNo=' +${pageNo}+ '&&language=en_US'}"><img width="35" height="20"
+                                                                                       th:src="@{/resources/images/en.jpg}"/></a>
+        <a th:href="@{'/admin/view-type?pageNo=' +${pageNo}+ '&&language=ru_RU'}"><img width="35" height="20"
+                                                                                       th:src="@{/resources/images/ru.jpg}"/></a>
+    </div>
+    <div class="col-md-3 offset-6">
+        <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
+        <a th:href="@{'/basket'}"><img width="35" height="20" th:src="@{/resources/images/basket.png}"/></a>
+        <a th:href="@{'/admin/admin-page'}" class="badge badge-primary"><span
+                th:text="#{info.admin_account}"></span></a>
+        <form th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}">
+        </form>
+    </div>
+</div>
+
+<span th:if="${types.size()} == 0">
+    <span th:text="#{types.missing}" class="text-danger"></span><br/>
+        <span th:if="${pageNo}>0">
+          <a th:href="@{'/admin/view-type?pageNo=' +${pageNo-1}} "><img width="65" height="20"
+                                                                        th:src="@{/resources/images/left.jpg}"/></a>
+    </span>
+</span>
+
+<span th:if="${types.size()}!=0">
+
+    <div class="col-md-6 offset-3">
+        <div class="list-group">
+    <a class="list-group-item list-group-item-primary">
+        <legend th:text="#{type.list}"></legend>
+    </a>
+    <tr th:each="type : ${types}">
+            <a class="list-group-item list-group-item-success">
+                         <span th:text="#{type.id}"></span><td th:text="${type.id}">id</td><br/>
+             <span th:text="#{type.name}"></span> <td th:text="${type.name}">id</td><br/>
+             <span th:text="#{type.category_id}"></span> <td th:text="${type.category.id}">id</td><br/>
+             <span th:text="#{type.category_name}"></span> <td th:text="${type.category.name}">id</td><br/>
+            </a>
+    </tr>
+</div>
+</div>
+          <span th:if="${pageNo}>0">
+        <a th:href="@{'/admin/view-type?pageNo=' +${pageNo-1}} "><img width="65" height="20"
+                                                                      th:src="@{/resources/images/left.jpg}"/></a>
+         </span>
+<span th:if="${pageNo}>=0">
+         <a th:href="@{'/admin/view-type?pageNo=' +${pageNo+1}} "><img width="65" height="20"
+                                                                       th:src="@{/resources/images/right.jpg}"/></a>
+        </span>
+    </span>
+
+</body>
+</html>

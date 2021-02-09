@@ -1,43 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/reg.css">
     <title> Registration </title>
 </head>
 <body>
-<div th:fragment="language">
-    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
-    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+<div sec:authorize="isAnonymous()" class="container text-center">
+    <span th:text="#{info.text}" class="text-danger"></span>
 </div>
-<header th:insert ="header :: header"></header>
-<fieldset>
-    <legend th:text="#{registration.user}">Регистрация пользователя</legend>
-     <form th:action="@{/save-user}" method="post" th:object="${userDto}">
-        <label th:for="user_name"><span th:text="#{registration.name}"></span></label></br>
-            <input  th:field="*{user_name}"  required type="text"/>
-         <span th:each="err : ${#fields.errors('user_name')}" th:text="#{${err}}" style="color: red">Error</span>
-       </br>
-        </br>
-        <label th:for="login_name"><span th:text="#{registration.login}"></span></label></br>
-            <input th:field="*{login_name}" required type="text" />
-         <span th:each="err : ${#fields.errors('login_name')}" th:text="#{${err}}" style="color: red">Error</span>
-        </br>
-        </br>
-        <label  th:for="phone_number"><span th:text="#{registration.phone_one}"></span></br>
-                                       <span th:text="#{registration.phone_two}"></span> 375291234567:</label></br>
-            <input  th:field="*{phone_number}" required type="text" />
-         <span th:each="err : ${#fields.errors('phone_number')}" th:text="#{${err}}" style="color: red">Error</span>
-        </br>
-        </br>
-        <label th:for="password"><span th:text="#{registration.password}"></span></label></br>
-            <input  th:field="*{password}" required type="password" />
-         <span th:each="err : ${#fields.errors('password')}" th:text="#{${err}}" style="color: red">Error</span>
-         </br>
-        </br>
-        <td>
-            <input type="submit" th:value="#{registration.reg}">
-        </td>
-    </form>
-</fieldset>
+<div class="row">
+    <div th:fragment="language" class="col-md-2 col-md-push-1">
+        <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+        <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+    </div>
+    <div class="col-md-3 col-md-push-7">
+        <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="badge badge-success"><span
+                th:text="#{info.sing_in}"></span></a>
+        <a sec:authorize="hasAnyAuthority('USER','ADMIN')" th:href="@{'/basket'}"><img width="35" height="20"
+                                                                                       th:src="@{/resources/images/basket.png}"/></a>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{'/user-page'}" class="badge badge-primary"><span
+                th:text="#{info.user_account}"></span></a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/admin/admin-page'}" class="badge badge-primary"><span
+                th:text="#{info.admin_account}"></span></a>
+        <form sec:authorize="hasAnyAuthority('USER','ADMIN')" th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}">
+        </form>
+    </div>
+</div>
+
+<div class="row reg">
+    <div class="col-md-4 col-md-push-4 container">
+        <div class="row main-form">
+            <form th:action="@{/save-user}" method="post" th:object="${userDto}">
+                <div class="form-group">
+                    <label th:for="userName" class="cols-sm-4  text-dark control-label"><span
+                            th:text="#{registration.name}"></span></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input th:field="*{userName}" required type="text" class="form-control"
+                                   placeholder="Enter your Name"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('userName')}" th:text="#{${err}}"
+                              style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="phoneNumber" class="cols-sm-4 text-dark control-label"><span
+                            th:text="#{registration.phone_one}"></span></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                            <input th:field="*{phoneNumber}" required type="text" class="form-control"
+                                   placeholder="Enter your phone 375291234567"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('phoneNumber')}" th:text="#{${err}}" style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="loginName" class="cols-sm-4 text-dark control-label"><span
+                            th:text="#{registration.login}"></span></label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input th:field="*{loginName}" required type="text" class="form-control"
+                                   placeholder="Enter your Login"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('loginName')}" th:text="#{${err}}" style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label th:for="password" class="cols-sm-4 text-dark control-label">Password</label>
+                    <div class="cols-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   placeholder="Enter your Password"/>
+                        </div>
+                        <span th:each="err : ${#fields.errors('password')}" th:text="#{${err}}"
+                              style="color: red">Error</span>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <input type="submit" th:value="#{registration.reg}" target="_blank"
+                           class="btn btn-success btn-md btn-block login-button"/>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

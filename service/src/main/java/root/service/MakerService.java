@@ -25,7 +25,7 @@ public class MakerService {
         return makerRepository.findById(id).orElse(null);
     }
 
-    public Boolean existsById(Integer id){
+    public Boolean existsById(Integer id) {
         return makerRepository.existsById(id);
     }
 }

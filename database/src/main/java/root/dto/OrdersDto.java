@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrdersDto {
 
-    private  String type_of_payment;
+    private  String typeOfPayment;
 }

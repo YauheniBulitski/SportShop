@@ -71,7 +71,7 @@ public class ShopController {
     @GetMapping("/product-type{typeId}")
     public Model getProductByType(Model model,
                                   @RequestParam(defaultValue = "0") Integer pageNo,
-                                  @RequestParam(defaultValue = "3") Integer pageSize,
+                                  @RequestParam(defaultValue = "4") Integer pageSize,
                                   @RequestParam(defaultValue = "id") String sortBy,
                                   @RequestParam("typeId") Integer typeId) {
 
@@ -84,7 +84,7 @@ public class ShopController {
     @GetMapping("/find-product")
     public Model getProduct(Model model,
                             @RequestParam(defaultValue = "0") Integer pageNo,
-                            @RequestParam(defaultValue = "3") Integer pageSize,
+                            @RequestParam(defaultValue = "4") Integer pageSize,
                             @RequestParam(defaultValue = "id") String sortBy,
                             @RequestParam("name") String name) {
 

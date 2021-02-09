@@ -26,29 +26,29 @@ public class UserValidator implements CustomValidator<UserDto> {
     @Override
     public void check(UserDto userDto, Errors errors) {
 
-        if (userDto.getUser_name().length() == 0 || "".equals(userDto.getUser_name().trim())) {
+        if (userDto.getUserName().length() == 0 || "".equals(userDto.getUserName().trim())) {
             errors.rejectValue("user_name", "79", "Имя не может быть пустым");
-        } else if (userDto.getUser_name().length() < 3 || userDto.getUser_name().length() > 64) {
+        } else if (userDto.getUserName().length() < 3 || userDto.getUserName().length() > 64) {
             errors.rejectValue("user_name", "80", "Имя должно содержать не меньше 3 и не больше 64 символов");
-        } else if (!userDto.getUser_name().matches("[a-zA-Zа-яА-Я]+")) {
+        } else if (!userDto.getUserName().matches("[a-zA-Zа-яА-Я]+")) {
             errors.rejectValue("user_name", "81", "Используйте кириллицу или латиницу");
         }
 
-        if (userDto.getPhone_number().length() == 0 || "".equals(userDto.getPhone_number().trim())) {
+        if (userDto.getPhoneNumber().length() == 0 || "".equals(userDto.getPhoneNumber().trim())) {
             errors.rejectValue("phone_number", "89", "Поле не может быть пустым");
-        } else if (!userDto.getPhone_number().matches(value)) {
+        } else if (!userDto.getPhoneNumber().matches(value)) {
             errors.rejectValue("phone_number", "90", "Введенный номер телефона не соответсвует требуемому формату");
         }
 
-        if (userDto.getLogin_name().length() == 0 || "".equals(userDto.getLogin_name().trim())) {
+        if (userDto.getLoginName().length() == 0 || "".equals(userDto.getLoginName().trim())) {
             errors.rejectValue("login_name", "100", "Логин не может быть пустым");
-        } else if (userServiceImpl.findByName(userDto.getLogin_name()).orElse(null) != null) {
+        } else if (userServiceImpl.findByName(userDto.getLoginName()).orElse(null) != null) {
             errors.rejectValue("login_name", "101", "Пользователь с таким логином уже существует");
-        } else if (!userDto.getLogin_name().matches("[0-9a-zA-Z]+")) {
+        } else if (!userDto.getLoginName().matches("[0-9a-zA-Z]+")) {
             errors.rejectValue("login_name", "81", "Используйте кириллицу и цифры");
-        } else if (userDto.getLogin_name() == null || "".equals(userDto.getLogin_name().trim())) {
+        } else if (userDto.getLoginName() == null || "".equals(userDto.getLoginName().trim())) {
             errors.rejectValue("login_name", "102", "Поле не может быть пустым");
-        } else if (userDto.getLogin_name().length() < 3 || userDto.getLogin_name().length() > 64) {
+        } else if (userDto.getLoginName().length() < 3 || userDto.getLoginName().length() > 64) {
             errors.rejectValue("login_name", "103", "Логин должен содержать не меньше 3 и не больше 64 символов");
         }
 

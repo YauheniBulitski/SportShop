@@ -4,7 +4,8 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="File1" fileName="C:/Users/Evgeni/IdeaProjects/SportShop/app.log" bufferedIO="false"/>
+<!--        <File name="File1" fileName="C:/Users/Evgeni/IdeaProjects/SportShop/app.log" bufferedIO="false"/>-->
+        <File name="File1" fileName="C:/Users/bulitski/IdeaProjects/SportShop/app.log" bufferedIO="false"/>
     </Appenders>
     <Loggers>
         <Logger name="root.aspect.AspectLog" level="info" additivity="false">

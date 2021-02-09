@@ -7,17 +7,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import root.dto.CategoryDto;
 import root.dto.ProductDto;
+import root.dto.TypeDto;
+import root.dto.UserDto;
 import root.entity.Product;
 import root.entity.User;
-import root.service.OrdersItemService;
-import root.service.OrdersService;
-import root.service.ProductService;
-import root.service.UserServiceImpl;
+import root.service.*;
 import root.validator.ProductValidation;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -30,26 +29,32 @@ public class AdminController {
     private final OrdersService ordersService;
     private final OrdersItemService ordersItemService;
     private final ProductValidation productValidation;
+    private final TypeService typeService;
+    private final CategoryService categoryService;
 
     @Autowired
     public AdminController(ProductService productService,
                            UserServiceImpl userServiceImpl,
                            OrdersService ordersService,
                            OrdersItemService ordersItemService,
-                           ProductValidation productValidation) {
+                           ProductValidation productValidation,
+                           TypeService typeService,
+                           CategoryService categoryService) {
         this.productService = productService;
         this.userServiceImpl = userServiceImpl;
         this.ordersService = ordersService;
         this.ordersItemService = ordersItemService;
         this.productValidation = productValidation;
+        this.categoryService = categoryService;
+        this.typeService = typeService;
     }
 
 
     @GetMapping("/admin-page")
-    public String getCategory(Model model,
-                              HttpSession session) {
+    public String getAdmin(Model model,
+                           HttpSession session) {
 
-        User user = userServiceImpl.findById((Long)session.getAttribute("userId")).orElse(null);
+        User user = userServiceImpl.findById((Long) session.getAttribute("userId")).orElse(null);
         model.addAttribute("user", user);
         return "/admin/admin-page";
     }
@@ -59,13 +64,19 @@ public class AdminController {
                         @RequestParam("id") Integer id) {
 
         model.addAttribute("id", id);
-        if (id == 1) {
+        if (id == 1 || id == 2) {
             model.addAttribute("productDto", new ProductDto());
+        } else if (id == 3) {
+            model.addAttribute("userDto", new UserDto());
+        } else if (id == 5) {
+            model.addAttribute("typeDto", new TypeDto());
+        } else if (id == 6) {
+            model.addAttribute("categoryDto", new CategoryDto());
         }
         return model;
     }
 
-    @PostMapping(value = "/edit-product",
+    @PostMapping(value = "/save-product",
             produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
     public String createProduct(@Validated ProductDto productDto,
                                 BindingResult bindingResult,
@@ -80,11 +91,11 @@ public class AdminController {
         return "redirect:/admin/admin-page";
     }
 
-    @PostMapping(value = "/update-price")
-    public String updatePrice(@RequestParam("price") BigDecimal price,
-                              @RequestParam("id") Long id) {
-
-        productService.updatePrice(price, id);
+    @PostMapping(value = "/update-product",
+            produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
+    public String updateProductAll(ProductDto productDto,
+                                   Model model) {
+        productService.updateProduct(productDto);
         return "redirect:/admin/admin-page";
     }
 
@@ -96,17 +107,10 @@ public class AdminController {
         return "redirect:/admin/admin-page";
     }
 
-    @PostMapping(value = "/dell-orders")
-    public String dellOrders(@RequestParam("id") Long id) {
-
-        ordersItemService.dellOrdersWithProduct(id);
-        return "redirect:/admin/admin-page";
-    }
-
     @GetMapping("/view-product")
     public Model getProduct(Model model,
                             @RequestParam(defaultValue = "0") Integer pageNo,
-                            @RequestParam(defaultValue = "3") Integer pageSize,
+                            @RequestParam(defaultValue = "4") Integer pageSize,
                             @RequestParam(defaultValue = "id") String sortBy) {
 
         model.addAttribute("products", productService.findAllProduct(pageNo, pageSize, sortBy));
@@ -136,6 +140,52 @@ public class AdminController {
         return model;
     }
 
+    @PostMapping(value = "/update-user",
+            produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
+    public String updateUsersAll(UserDto userDto,
+                                 Model model) {
+        userServiceImpl.updateUser(userDto);
+        return "redirect:/admin/admin-page";
+    }
+
+    @GetMapping("/view-type")
+    public Model getTypes(Model model,
+                          @RequestParam(defaultValue = "0") Integer pageNo,
+                          @RequestParam(defaultValue = "3") Integer pageSize,
+                          @RequestParam(defaultValue = "id") String sortBy) {
+
+        model.addAttribute("types", typeService.findAll(pageNo, pageSize, sortBy))
+                .addAttribute("pageNo", pageNo);
+        return model;
+    }
+
+    @PostMapping(value = "/update-type",
+            produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
+    public String updateUsersAll(TypeDto typeDto,
+                                 Model model) {
+        typeService.update(typeDto);
+        return "redirect:/admin/admin-page";
+    }
+
+    @GetMapping("/view-category")
+    public Model getCategory(Model model,
+                             @RequestParam(defaultValue = "0") Integer pageNo,
+                             @RequestParam(defaultValue = "3") Integer pageSize,
+                             @RequestParam(defaultValue = "id") String sortBy) {
+
+        model.addAttribute("categories", categoryService.findAll(pageNo, pageSize, sortBy))
+                .addAttribute("pageNo", pageNo);
+        return model;
+    }
+
+    @PostMapping(value = "/update-category",
+            produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
+    public String updateUsersAll(CategoryDto categoryDto,
+                                 Model model) {
+        categoryService.update(categoryDto);
+        return "redirect:/admin/admin-page";
+    }
+
     @GetMapping(value = "/list-product")
     public String listProduct(Model model,
                               @ModelAttribute("order") Long id,
@@ -147,6 +197,7 @@ public class AdminController {
                 ordersService.findById(id));
         model.addAttribute("products", products);
         model.addAttribute("pageNo", pageNo);
+        model.addAttribute("order", id);
         return "/admin/list-products";
     }
 

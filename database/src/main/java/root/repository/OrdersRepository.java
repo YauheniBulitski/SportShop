@@ -26,11 +26,11 @@ public interface OrdersRepository extends CrudRepository<Orders, Long> {
 
     @Modifying
     @Query("update Orders o set o.price=:price where o.id=:id")
-    public void updateOrdersPrice(@Param("price") BigDecimal price, @Param("id") Long id);
+    void updateOrdersPrice(@Param("price") BigDecimal price, @Param("id") Long id);
 
     List<Orders> findByUser_IdAndStatus(Long id, String status);
 
     @Modifying
     @Query("update Orders o set o.status=:status where o.id=:id")
-    public void updateStatus(@Param("status") String status,@Param("id") Long id);
+    void updateStatus(@Param("status") String status, @Param("id") Long id);
 }

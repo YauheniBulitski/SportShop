@@ -48,6 +48,7 @@ CREATE TABLE product
     name        CHARACTER VARYING(256) NOT NULL,
     price       numeric(7, 2)          NOT NULL,
     description CHARACTER VARYING(560),
+    url CHARACTER VARYING(30),
     type_id     INTEGER               NOT NULL REFERENCES type (id),
     maker_id    INTEGER               NOT NULL REFERENCES maker (id)
 );

@@ -1,37 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/shop.css">
     <title>Продукт</title>
 </head>
 <body>
-<header th:insert ="header :: header"></header>
+<div sec:authorize="isAnonymous()" class="container text-center">
+    <span th:text="#{info.text}" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div th:fragment="language" class="col-md-2  offset-1">
+        <a th:href="@{'/find-product?name='+${name}+'&pageNo=' +${pageNo}+'&&language=en_US'}"><img width="35"
+                                                                                                    height="20"
+                                                                                                    th:src="@{/resources/images/en.jpg}"/></a>
+        <a th:href="@{'/find-product?name='+${name}+'&pageNo=' +${pageNo}+'&&language=ru_RU'}"><img width="35"
+                                                                                                    height="20"
+                                                                                                    th:src="@{/resources/images/ru.jpg}"/></a>
+    </div>
+    <div class="col-md-3 offset-6">
+        <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
+        <a sec:authorize="isAnonymous()" th:href="@{/registration}" class="badge badge-info"> <span
+                th:text="#{info.registration}"></span></a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="badge badge-success"><span
+                th:text="#{info.sing_in}"></span></a>
+        <a sec:authorize="hasAnyAuthority('USER','ADMIN')" th:href="@{'/basket'}"><img width="35" height="20"
+                                                                                       th:src="@{/resources/images/basket.png}"/></a>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{'/user-page'}" class="badge badge-primary"><span
+                th:text="#{info.user_account}"></span></a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/admin/admin-page'}" class="badge badge-primary"><span
+                th:text="#{info.admin_account}"></span></a>
+        <form sec:authorize="hasAnyAuthority('USER','ADMIN')" th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}">
+        </form>
+    </div>
+</div>
 <div>
     <span th:if="${products.size()}==0">
-    <span th:text="#{product.missing}"></span><br/>
+    <span th:text="#{product.missing}" class="text-danger"></span><br/>
         <span th:if="${pageNo}>0">
-          <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+          <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo-1}} "><img width="65" height="20"
+                                                                                     th:src="@{/resources/images/left.jpg}"/></a>
     </span>
         </span>
     <span th:if="${products.size()}!=0">
-         <optional th:each="product : ${products}">
-             <fieldset>
-         <form th:action="@{/addInBasket}" th:method="post">
-             <span th:text="#{product.name}"></span> <td th:text="${product.name}">name</td><br/>
-           <span th:text="#{product.producer}"></span>  <td th:text="${product.maker.name}">author</td><br/>
-           <span th:text="#{product.price}"></span> <td th:text="${product.price}">price</td><br/>
-            <span th:text="#{product.description}"></span> <td th:text="${product.description}">describe</td><br/>
-         <span sec:authorize ="hasAnyAuthority('USER','ADMIN')">
-               <button name="product" th:type="submit" th:value="${product.id}"><span th:text="#{add.cart}"></span></button>
-         </span>
-         </form>
-        </fieldset>
-         </optional>
+        </br></br></br>
+
+        <div class="row">
+            <tr th:each="product : ${products}">
+            <div class="col-lg-3 col-md-4 col-6 text-white bg-info fix">
+                <img class="img-fluid" th:src="${product.url}" alt="Card image cap">
+                 <form th:action="@{/addInBasket}" th:method="post">
+                                         <span th:text="#{product.name}"></span> <td th:text="${product.name}"
+                                                                                     class="card-text">name</td><br/>
+                                         <span th:text="#{product.producer}"></span> <td th:text="${product.maker.name}"
+                                                                                         class="card-text">author</td><br/>
+                                         <span th:text="#{product.price}"></span> <td th:text="${product.price}"
+                                                                                      class="card-text">price</td><br/>
+                                         <span th:text="#{product.description}"></span> <td
+                         th:text="${product.description}">describe</td><br/>
+                                         <span sec:authorize="hasAnyAuthority('USER','ADMIN')">
+                                    <button name="product" th:type="submit" th:value="${product.id}"
+                                            class="btn btn-success  btn-sm center"><span
+                                            th:text="#{add.basket}"></span></button>
+                                         </span>
+                          </form>
+            </div>
+            </tr>
+        </div>
          <span th:if="${pageNo}>0">
-        <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+        <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo-1}} "><img width="65" height="20"
+                                                                                   th:src="@{/resources/images/left.jpg}"/></a>
          </span>
         <span th:if="${pageNo}>=0">
-         <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo+1}} "><img width="65" height="20" th:src="@{/resources/images/left.jpg}"/></a>
+         <a th:href="@{'/find-product?name='+${name}+'&pageNo='+${pageNo+1}} "><img width="65" height="20"
+                                                                                    th:src="@{/resources/images/right.jpg}"/></a>
         </span>
     </span>
 </div>

@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -27,6 +26,9 @@ public class Product extends BaseEntity<Long> {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "url")
+    private String url;
 
     @OneToOne(mappedBy = "product")
     private Count count;

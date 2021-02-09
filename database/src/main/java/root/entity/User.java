@@ -1,32 +1,29 @@
 package root.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Getter
 @Builder
+@Data
+@ToString(exclude = {"orders","products"})
 @Table(name="users")
 public class User extends BaseEntity<Long> {
 
     @Column(name = "user_name")
-    private String user_name;
+    private String userName;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name = "name")
     private String name;

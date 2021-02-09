@@ -11,7 +11,6 @@ import root.dto.UserDto;
 import root.entity.Orders;
 import root.entity.User;
 import root.service.OrdersService;
-import root.service.ProductService;
 import root.service.UserServiceImpl;
 import root.validator.UserValidator;
 
@@ -22,17 +21,14 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private final ProductService productService;
     private final UserServiceImpl userServiceImpl;
     private final OrdersService ordersService;
     private final UserValidator userValidator;
 
     @Autowired
-    public UserController(ProductService productService,
-                          UserServiceImpl userServiceImpl,
+    public UserController(UserServiceImpl userServiceImpl,
                           OrdersService ordersService,
                           UserValidator userValidator) {
-        this.productService = productService;
         this.userServiceImpl = userServiceImpl;
         this.ordersService = ordersService;
         this.userValidator = userValidator;
@@ -67,4 +63,5 @@ public class UserController {
         model.addAttribute("orders", orders);
         return "/user-page";
     }
+
 }

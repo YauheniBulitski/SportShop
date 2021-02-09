@@ -3,7 +3,6 @@ package root.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -12,6 +11,7 @@ import java.util.List;
 @Builder
 @Entity
 @Getter
+@Setter
 @ToString(exclude = {"products","category"})
 @Table(name = "type")
 public class Type extends BaseEntity<Integer> {

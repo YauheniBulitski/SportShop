@@ -1,35 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/shop.css">
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="language">
-    <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
-    <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+<div class="row">
+    <div th:fragment="language" class="col-md-2 offset-1">
+        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo}+ '&&language=en_US'}"><img width="35" height="20"
+                                                                                          th:src="@{/resources/images/en.jpg}"/></a>
+        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo}+ '&&language=ru_RU'}"><img width="35" height="20"
+                                                                                          th:src="@{/resources/images/ru.jpg}"/></a>
+    </div>
+    <div class="col-md-2 offset-7">
+        <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
+        <a th:href="@{'/admin/admin-page'}" class="badge badge-primary"><span
+                th:text="#{info.admin_account}"></span></a>
+        <form th:action="@{/logout}" th:method="post">
+            <input type="submit" th:value="#{info.sing_out}" class="btn btn-danger">
+        </form>
+    </div>
 </div>
-<header th:insert ="header :: header"></header>
 <div>
-        </span>
+    </span>
     <span th:if="${products.size()}!=0">
-         <optional th:each="product : ${products}">
-             <fieldset>
-         <form>
-           <span th:text="#{product.id}"></span><td th:text="${product.id}">name</td><br/>
+
+        <div class="row view">
+            <tr th:each="product : ${products}">
+            <div class="col-lg-3 col-md-4 col-6 text-white bg-info">
+                <img class="img-fluid" th:src="${product.url}" alt="Card image cap">
+                <span th:text="#{product.id}"></span><td th:text="${product.id}">name</td><br/>
            <span th:text="#{product.name}"></span> <td th:text="${product.name}">name</td><br/>
            <span th:text="#{product.producer}"></span> <td th:text="${product.maker.name}">author</td><br/>
              <span th:text="#{product.price}"></span> <td th:text="${product.price}">price</td><br/>
            <span th:text="#{product.description}"></span> <td th:text="${product.description}">describe</td><br/>
-           <span th:text="#{product.stock}"></span> <td th:text="${product.count}">count</td><br/>
-         </form>
-        </fieldset>
-         </optional>
+            </div>
+            </tr>
+        </div>
          <span th:if="${pageNo}>0">
-        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo-1}} "><img width="65" height="20" th:src="@{/resources/images/right.jpg}"/></a>
+        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo-1}} "><img width="65" height="20"
+                                                                         th:src="@{/resources/images/left.jpg}"/></a>
          </span>
         <span th:if="${pageNo}>=0">
-         <a th:href="@{'/admin/view-product?pageNo=' +${pageNo+1}} "><img width="65" height="20" th:src="@{/resources/images/left.jpg}"/></a>
+         <a th:href="@{'/admin/view-product?pageNo=' +${pageNo+1}} "><img width="65" height="20"
+                                                                          th:src="@{/resources/images/right.jpg}"/></a>
         </span>
     </span>
 </div>

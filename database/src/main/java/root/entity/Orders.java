@@ -4,15 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-@ToString(exclude = "orders_item")
+@ToString(exclude = "ordersItem")
 @Entity
 @Data
 @Getter
@@ -21,7 +20,7 @@ public class Orders extends BaseEntity<Long> {
 
 
     @Column(name = "time_of_orders", nullable = false)
-    private LocalDateTime localDateTime;
+    private LocalDate localDate;
 
     @Column(name = "price")
     private BigDecimal price;

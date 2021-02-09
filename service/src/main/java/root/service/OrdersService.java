@@ -13,7 +13,7 @@ import root.repository.OrdersItemRepository;
 import root.repository.OrdersRepository;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,26 +21,20 @@ public class OrdersService {
 
     private final OrdersRepository ordersRepository;
     private final OrdersItemRepository ordersItemRepository;
-    private final UserServiceImpl userServiceImpl;
-    private final ProductService productService;
 
     @Autowired
     public OrdersService(OrdersRepository ordersRepository,
-                         OrdersItemRepository ordersItemRepository,
-                         UserServiceImpl userServiceImpl,
-                         ProductService productService) {
+                         OrdersItemRepository ordersItemRepository) {
         this.ordersRepository = ordersRepository;
         this.ordersItemRepository = ordersItemRepository;
-        this.userServiceImpl = userServiceImpl;
-        this.productService = productService;
     }
 
     @Transactional
     public Orders saveOrders(OrdersDto ordersDto, User user) {
         Orders orders = Orders.builder()
-                .localDateTime(LocalDateTime.now())
+                .localDate(LocalDate.now())
                 .status("NOT_PAID")
-                .typeOfPayment(ordersDto.getType_of_payment())
+                .typeOfPayment(ordersDto.getTypeOfPayment())
                 .user(user)
                 .build();
         return ordersRepository.save(orders);
@@ -56,10 +50,6 @@ public class OrdersService {
         return orders;
     }
 
-    public void dellById(Long id) {
-        ordersRepository.deleteById(id);
-    }
-
     public Orders findById(Long id) {
         return ordersRepository.findById(id).get();
     }
@@ -69,7 +59,7 @@ public class OrdersService {
         ordersRepository.updateStatus(status, id);
     }
 
-    public List<Orders> findAllOrders(int pageN, int pageSize, String sortBy){
+    public List<Orders> findAllOrders(int pageN, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy));
         List<Orders> orders = ordersRepository.findAll(pageable);
         return orders;
