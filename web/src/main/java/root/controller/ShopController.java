@@ -73,11 +73,20 @@ public class ShopController {
                                   @RequestParam(defaultValue = "0") Integer pageNo,
                                   @RequestParam(defaultValue = "4") Integer pageSize,
                                   @RequestParam(defaultValue = "id") String sortBy,
+                                  @RequestParam(defaultValue = "null") String desc,
                                   @RequestParam("typeId") Integer typeId) {
 
-        model.addAttribute("products", productService.findAllByTypeId(typeId, pageNo, pageSize, sortBy))
-                .addAttribute("pageNo", pageNo)
-                .addAttribute("typeId", typeId);
+        if (desc.equals("desc")) {
+            model.addAttribute("products", productService.findAllByTypeIdDesc(typeId, pageNo, pageSize, sortBy))
+            .addAttribute("desc",desc);
+        } else {
+            model.addAttribute("products", productService.findAllByTypeId(typeId, pageNo, pageSize, sortBy));
+        }
+
+        model.addAttribute("pageNo", pageNo)
+                .addAttribute("typeId", typeId)
+                .addAttribute("sortBy", sortBy)
+                .addAttribute("pageSize",pageSize);
         return model;
     }
 

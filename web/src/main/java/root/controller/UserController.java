@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    public Model getCategory(Model model) {
+    public Model getRegistration(Model model) {
         model.addAttribute("userDto", new UserDto());
         return model;
     }

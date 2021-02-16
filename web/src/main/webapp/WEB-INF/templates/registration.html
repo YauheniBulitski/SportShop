@@ -24,8 +24,8 @@
 </div>
 <div class="row">
     <div th:fragment="language" class="col-md-2 col-md-push-1">
-        <a href="?language=en_US"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
-        <a href="?language=ru_RU"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
+        <a th:href="@{/registration?language=en_US}"><img width="35" height="20" th:src="@{/resources/images/en.jpg}"/></a>
+        <a th:href="@{/registration?language=ru_RU}"><img width="35" height="20" th:src="@{/resources/images/ru.jpg}"/></a>
     </div>
     <div class="col-md-3 col-md-push-7">
         <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
@@ -54,7 +54,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                             <input th:field="*{userName}" required type="text" class="form-control"
-                                   placeholder="Enter your Name"/>
+                                   th:placeholder="#{reg.name}"/>
                         </div>
                         <span th:each="err : ${#fields.errors('userName')}" th:text="#{${err}}"
                               style="color: red">Error</span>
@@ -68,7 +68,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
                             <input th:field="*{phoneNumber}" required type="text" class="form-control"
-                                   placeholder="Enter your phone 375291234567"/>
+                                   th:placeholder="#{reg.phone}"/>
                         </div>
                         <span th:each="err : ${#fields.errors('phoneNumber')}" th:text="#{${err}}" style="color: red">Error</span>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
                             <input th:field="*{loginName}" required type="text" class="form-control"
-                                   placeholder="Enter your Login"/>
+                                   th:placeholder="#{reg.login}"/>
                         </div>
                         <span th:each="err : ${#fields.errors('loginName')}" th:text="#{${err}}" style="color: red">Error</span>
                     </div>
@@ -93,7 +93,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                             <input type="password" class="form-control" name="password" id="password"
-                                   placeholder="Enter your Password"/>
+                                   th:placeholder="#{reg.password}"/>
                         </div>
                         <span th:each="err : ${#fields.errors('password')}" th:text="#{${err}}"
                               style="color: red">Error</span>

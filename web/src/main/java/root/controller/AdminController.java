@@ -85,7 +85,7 @@ public class AdminController {
         productValidation.check(productDto, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("id", 1);
-            return "/admin/edit";
+            return "admin/edit";
         }
         productService.saveProduct(productDto);
         return "redirect:/admin/admin-page";

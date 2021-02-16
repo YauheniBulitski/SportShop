@@ -45,6 +45,11 @@ public class ProductService {
         return products;
     }
 
+    public List<Product> findAllByTypeIdDesc(Integer id, int pageN, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy).descending());
+        List<Product> products = productRepository.findAllByTypeId(id, pageable);
+        return products;
+    }
     public List<Product> findAllMatch(String name, int pageN, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy));
         List<Product> products = productRepository.findAllMatch(name.toUpperCase(), pageable);

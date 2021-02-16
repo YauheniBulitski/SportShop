@@ -30,9 +30,11 @@ public class PersistenceConfig {
 
     @Bean
     public DataSource dataSource(@Value("${db.driver}") String driverName,
-                                 @Value("${db.url}") String url,
+                                 @Value("${db.urlS}") String urlS,
+                                 @Value("${db.urlF}") String urlF,
                                  @Value("${db.user}") String username,
                                  @Value("${db.password}") String password) {
+        String url =urlS+getClass().getClassLoader().getResource("").getPath()+urlF;
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driverName);
         dataSource.setUrl(url);

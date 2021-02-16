@@ -21,10 +21,13 @@
 <body>
 <div class="row">
     <div th:fragment="language" class="col-md-2 col-md-push-1">
-        <a th:href="@{'/admin/edit?id=' + ${id}+ '&&language=en_US'}"><img width="35" height="20"
-                                                                           th:src="@{/resources/images/en.jpg}"/></a>
-        <a th:href="@{'/admin/edit?id=' + ${id}+ '&&language=ru_RU'}"><img width="35" height="20"
-                                                                           th:src="@{/resources/images/ru.jpg}"/></a>
+
+        <a th:href="@{'/admin/edit?id='+${id}+'&language=en_US'}"><img width="35"
+                                                                       height="20"
+                                                                       th:src="@{/resources/images/en.jpg}"/></a>
+        <a th:href="@{'/admin/edit?id='+${id}+'&language=ru_RU'}"><img width="35"
+                                                                       height="20"
+                                                                       th:src="@{/resources/images/ru.jpg}"/></a>
     </div>
     <div class="col-md-3 col-md-push-7">
         <a th:href="@{/shop}" class="badge badge-info"><span th:text="#{info.back}"></span></a>
@@ -48,7 +51,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
                         <input th:field="*{name}" required type="text" class="form-control"
-                               placeholder="Enter product name"/>
+                               th:placeholder="#{ed.prod_name}"/>
                     </div>
                     <span th:each="err : ${#fields.errors('name')}" th:text="#{${err}}" style="color: red">Error</span>
                 </div>
@@ -73,7 +76,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-file-text" aria-hidden="true"></i></span>
                         <input th:field="*{describe}" required type="text" class="form-control"
-                               placeholder="Enter describe"/>
+                               th:placeholder="#{ed.desc}"/>
                     </div>
                      <span th:each="err : ${#fields.errors('describe')}" th:text="#{${err}}"
                            style="color: red">Error</span>
@@ -86,7 +89,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
                         <input th:field="*{count}" class="form-control" name="count" type="number"
-                               placeholder="Enter count"/>
+                               th:placeholder="#{ed.count}"/>
                     </div>
                      <span th:each="err : ${#fields.errors('count')}" th:text="#{${err}}"
                            style="color: red">Error</span>
@@ -99,7 +102,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-suitcase" aria-hidden="true"></i></span>
                         <input th:field="*{type_id}" class="form-control" name="type_id" type="number"
-                               placeholder="Enter id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                     <span th:each="err : ${#fields.errors('type_id')}" th:text="#{${err}}"
                           style="color: red">Error</span>
@@ -112,7 +115,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
                         <input th:field="*{maker_id}" class="form-control" name="maker_id" type="number"
-                               placeholder="Enter id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                      <span th:each="err : ${#fields.errors('maker_id')}" th:text="#{${err}}"
                            style="color: red">Error</span>
@@ -125,7 +128,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
                         <input th:field="*{url}" type="text" th:value="def" class="form-control"
-                               placeholder="Enter picture name"/>
+                               th:placeholder="#{ed.pict_name}"/>
                     </div>
                 </div>
             </div>
@@ -154,7 +157,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-address-book " aria-hidden="true"></i></span>
                         <input th:field="*{id}" class="form-control" name="id" required type="number"
-                               placeholder="Enter id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                 </div>
             </div>
@@ -163,7 +166,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
-                        <input th:field="*{name}" type="text" class="form-control" placeholder="Enter product name"/>
+                        <input th:field="*{name}" type="text" class="form-control" th:placeholder="#{ed.prod_name}"/>
                     </div>
                 </div>
             </div>
@@ -184,7 +187,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-file-text" aria-hidden="true"></i></span>
-                        <input th:field="*{describe}" type="text" class="form-control" placeholder="Enter describe"/>
+                        <input th:field="*{describe}" type="text" class="form-control" th:placeholder="#{ed.desc}"/>
                     </div>
                 </div>
             </div>
@@ -195,7 +198,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
                         <input th:field="*{count}" class="form-control" name="count" type="number"
-                               placeholder="Enter count"/>
+                               th:placeholder="#{ed.count}"/>
                     </div>
                 </div>
             </div>
@@ -206,7 +209,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-suitcase" aria-hidden="true"></i></span>
                         <input th:field="*{type_id}" class="form-control" name="type_id" type="number"
-                               placeholder="Enter id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                     <span th:each="err : ${#fields.errors('type_id')}" th:text="#{${err}}"
                           style="color: red">Error</span>
@@ -219,7 +222,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
                         <input th:field="*{maker_id}" class="form-control" name="maker_id" type="number"
-                               placeholder="Enter id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                 </div>
             </div>
@@ -230,7 +233,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></span>
                         <input th:field="*{url}" type="text" th:value="def" class="form-control"
-                               placeholder="Enter new picture name"/>
+                               th:placeholder="#{ed.pict_name}"/>
                     </div>
                 </div>
             </div>
@@ -258,7 +261,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         <input th:field="*{id}" required type="number" class="form-control"
-                               placeholder="Enter user id"/>
+                               th:placeholder="#{ed.user_id}"/>
                     </div>
                 </div>
             </div>
@@ -269,7 +272,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        <input th:field="*{userName}" type="text" class="form-control" placeholder="Enter new Name"/>
+                        <input th:field="*{userName}" type="text" class="form-control" th:placeholder="#{ed.user_name}"/>
                     </div>
                 </div>
             </div>
@@ -281,7 +284,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
                         <input th:field="*{phoneNumber}" type="text" class="form-control"
-                               placeholder="Enter new phone"/>
+                               th:placeholder="#{ed.new_phone}"/>
                     </div>
                 </div>
             </div>
@@ -319,7 +322,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-truck" aria-hidden="true"></i></span>
-                        <input class="form-control" name="id" type="number" placeholder="Enter id"/>
+                        <input class="form-control" name="id" type="number" th:placeholder="#{ed.id}"/>
                     </div>
                 </div>
             </div>
@@ -357,7 +360,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         <input th:field="*{id}" required type="number" class="form-control"
-                               placeholder="Enter type id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                 </div>
             </div>
@@ -368,7 +371,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        <input th:field="*{name}" type="text" class="form-control" placeholder="Enter new type name"/>
+                        <input th:field="*{name}" type="text" class="form-control" th:placeholder="#{ed.new_type}"/>
                     </div>
                 </div>
             </div>
@@ -380,7 +383,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
                         <input th:field="*{categoryId}" type="number" class="form-control"
-                               placeholder="Enter new category id"/>
+                               th:placeholder="#{ed.new_category}"/>
                     </div>
                 </div>
             </div>
@@ -409,7 +412,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         <input th:field="*{id}" required type="number" class="form-control"
-                               placeholder="Enter category id"/>
+                               th:placeholder="#{ed.id}"/>
                     </div>
                 </div>
             </div>
@@ -420,7 +423,7 @@
                 <div class="cols-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        <input th:field="*{name}" type="text" class="form-control" placeholder="Enter new type name"/>
+                        <input th:field="*{name}" type="text" class="form-control" th:placeholder="#{ed.new_catName}"/>
                     </div>
                 </div>
             </div>
