@@ -19,11 +19,11 @@
     <title>Title</title>
 </head>
 <body>
-<div class="row">
+<div class="row" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
     <div th:fragment="language" class="col-md-2 offset-1">
-        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo}+ '&&language=en_US'}"><img width="35" height="20"
+        <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('language','en_US').toUriString()}"><img width="35" height="20"
                                                                                           th:src="@{/resources/images/en.jpg}"/></a>
-        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo}+ '&&language=ru_RU'}"><img width="35" height="20"
+        <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('language','ru_RU').toUriString()}"><img width="35" height="20"
                                                                                           th:src="@{/resources/images/ru.jpg}"/></a>
     </div>
     <div class="col-md-2 offset-7">
@@ -35,16 +35,71 @@
         </form>
     </div>
 </div>
+
+</br></br>
+<div>
+    <div class="row" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}">
+
+        <div class="col-md-3  offset-1">
+            <a  th:href="@{'/admin/view-product?pageSize='+${pageSize} +'&sortBy=price'}" class="badge badge-primary"><span th:text="#{sort.price_desc}"></span></a>
+            <a th:href="@{'/admin/view-product?pageSize='+${pageSize}+'&sortBy=price'+'&desc=desc'}" class="badge badge-primary"><span th:text="#{sort.price}"></span></a>
+        </div>
+
+        <div class="col-md-3 offset-2">
+            <ul class="pagination">
+                <span th:text="#{view.count}" class="text-success"></span>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageSize','4').toUriString()}"
+                                         class="page-link">4</a></li>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageSize','8').toUriString()} "
+                                         class="page-link">8</a></li>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageSize','12').toUriString()} "
+                                         class="page-link">12</a></li>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-2 offset-1" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder)}"м>
+            <ul class="pagination">
+                <li class="page-item">
+        <span th:if="${pageNo}==0">
+      <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',pageNo).toUriString()} " class="page-link"
+         aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+        </span>
+                    <span th:if="${pageNo}>0">
+      <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',pageNo-1).toUriString()} " class="page-link"
+         aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+        </span>
+
+                </li>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',0).toUriString()} "
+                                         class="page-link"><span th:text="1"></span></a></li>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',1).toUriString()} "
+                                         class="page-link"><span th:text="2"></span></a></li>
+                <li class="page-item"><a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',2).toUriString()} "
+                                         class="page-link"><span th:text="3"></span></a></li>
+                <li class="page-item">
+                    <a th:href="${urlBuilder.fromCurrentRequest().replaceQueryParam('pageNo',pageNo+1).toUriString()} " class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 <div>
     </span>
     <span th:if="${products.size()}!=0">
 
         <div class="row view">
             <tr th:each="product : ${products}">
-            <div class="col-lg-3 col-md-4 col-6 text-white bg-info">
+            <div class="col-lg-3 col-md-4 col-6 text-white border border-dark bg-info">
                 <img class="img-fluid" th:src="${product.url}" alt="Card image cap">
-                <span th:text="#{product.id}"></span><td th:text="${product.id}">name</td><br/>
-           <span th:text="#{product.name}"></span> <td th:text="${product.name}">name</td><br/>
+                <span th:text="#{product.id}"></span><td th:text="${product.id}"></td><br/>
+           <span th:text="#{product.name}"></span> <td th:text="${product.name}"></td><br/>
            <span th:text="#{product.producer}"></span> <td th:text="${product.maker.name}">author</td><br/>
              <span th:text="#{product.price}"></span> <td th:text="${product.price}">price</td><br/>
            <span th:text="#{product.description}"></span> <td th:text="${product.description}">describe</td><br/>

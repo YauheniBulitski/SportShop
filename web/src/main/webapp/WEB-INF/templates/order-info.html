@@ -91,11 +91,11 @@
     </br>
 </div>
 
-<div class="col-md-3 offset-4 pay">
+<div class="col-md-4 offset-3 pay">
     <form th:action="@{/orders}" method="post">
         </br>
         <select id="typeOfPayment" name="typeOfPayment" class="form-control">
-            <option>Type of payment</option>
+            <option th:text="#{order.pay}"></option>
             <option th:value="CASH" th:text="#{type.payment_one}"></option>
             <option th:value="CARD" th:text="#{type.payment_two}"></option>
             </option>
@@ -104,16 +104,19 @@
             <div id="CASH">
                 <em><span th:text="#{pay.cash}" class="text-danger"></span></em></br>
                 <input field="ch" type="number" maxlength="4"/>
+                <td>
+                    <button th:type="submit" class="btn btn-success bat" th:text="#{order.button}"></button>
+                </td>
             </div>
             <div id="CARD">
                 <em><span th:text="#{pay.card}" class="text-danger"></span></em></br>
                 <input field="cd" type="number" maxlength="16"/>
+                <td>
+                    <button th:type="submit" class="btn btn-success bat" th:text="#{order.button}"></button>
+                </td>
             </div>
         </div>
-        </br>
-        <td>
-            <button th:type="submit" class="btn btn-success bat" th:text="#{order.button}"></button>
-        </td>
+
     </form>
 </div>
 </body>

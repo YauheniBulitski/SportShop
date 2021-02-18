@@ -1,6 +1,7 @@
 package root.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,6 @@ import root.service.UserServiceImpl;
 import root.utils.BaseHelper;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class ShopController {
@@ -78,7 +78,7 @@ public class ShopController {
 
         if (desc.equals("desc")) {
             model.addAttribute("products", productService.findAllByTypeIdDesc(typeId, pageNo, pageSize, sortBy))
-            .addAttribute("desc",desc);
+                    .addAttribute("desc", desc);
         } else {
             model.addAttribute("products", productService.findAllByTypeId(typeId, pageNo, pageSize, sortBy));
         }
@@ -86,21 +86,28 @@ public class ShopController {
         model.addAttribute("pageNo", pageNo)
                 .addAttribute("typeId", typeId)
                 .addAttribute("sortBy", sortBy)
-                .addAttribute("pageSize",pageSize);
+                .addAttribute("pageSize", pageSize);
         return model;
     }
 
-    @GetMapping("/find-product")
+    @GetMapping(value = "/find-product",
+            produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
     public Model getProduct(Model model,
                             @RequestParam(defaultValue = "0") Integer pageNo,
                             @RequestParam(defaultValue = "4") Integer pageSize,
                             @RequestParam(defaultValue = "id") String sortBy,
+                            @RequestParam(defaultValue = "null") String desc,
                             @RequestParam("name") String name) {
-
-        List<Product> products = productService.findAllMatch(name, pageNo, pageSize, sortBy);
-        model.addAttribute("products", products);
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("name", name);
+        if (desc.equals("desc")) {
+            model.addAttribute("products", productService.findAllMatchDesc(name, pageNo, pageSize, sortBy))
+                    .addAttribute("desc", desc);
+        } else {
+            model.addAttribute("products", productService.findAllMatch(name, pageNo, pageSize, sortBy));
+        }
+        model.addAttribute("pageNo", pageNo)
+                .addAttribute("name", name)
+                .addAttribute("sortBy", sortBy)
+                .addAttribute("pageSize", pageSize);
         return model;
     }
 

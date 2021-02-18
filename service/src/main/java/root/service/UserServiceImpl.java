@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
             if (!userDto.getPhoneNumber().equals("")) {
                 user.setPhoneNumber(userDto.getPhoneNumber());
             }
-            if (!userDto.getRole().equals("")) {
+            if (!userDto.getRole().equals("User role")) {
                user.setRole(roleService.findByName(userDto.getRole()));
             }
             save(user);

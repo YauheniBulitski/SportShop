@@ -56,8 +56,20 @@ public class ProductService {
         return products;
     }
 
+    public List<Product> findAllMatchDesc(String name, int pageN, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy).descending());
+        List<Product> products = productRepository.findAllMatch(name.toUpperCase(), pageable);
+        return products;
+    }
+
     public List<Product> findAllProduct(int pageN, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy));
+        List<Product> products = productRepository.findAll(pageable);
+        return products;
+    }
+
+    public List<Product> findAllProductDesc(int pageN, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageN, pageSize, Sort.by(sortBy).descending());
         List<Product> products = productRepository.findAll(pageable);
         return products;
     }

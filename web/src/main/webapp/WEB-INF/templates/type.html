@@ -25,9 +25,9 @@
 
 <div class="row">
     <div th:fragment="language" class="col-md-2  offset-1">
-        <a th:href="@{'/type?categoryId=' + ${categoryId}} + '&&language=en_US'"><img width="35" height="20"
+        <a th:href="@{'/type?categoryId=' + ${categoryId}} + '&language=en_US'"><img width="35" height="20"
                                                                                       th:src="@{/resources/images/en.jpg}"/></a>
-        <a th:href="@{'/type?categoryId=' + ${categoryId}} + '&&language=ru_RU'"><img width="35" height="20"
+        <a th:href="@{'/type?categoryId=' + ${categoryId}} + '&language=ru_RU'"><img width="35" height="20"
                                                                                       th:src="@{/resources/images/ru.jpg}"/></a>
     </div>
     <div class="col-md-3 offset-6">
@@ -48,7 +48,7 @@
     </div>
 </div>
 <span th:if="${types.size()}==0">
-   <span th:text="#{product.missing}"></span><br/>
+   <span th:text="#{product.missing}" class="text-danger"></span><br/>
 </span>
 
 <div class="col-md-3 type">

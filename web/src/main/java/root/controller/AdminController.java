@@ -111,10 +111,17 @@ public class AdminController {
     public Model getProduct(Model model,
                             @RequestParam(defaultValue = "0") Integer pageNo,
                             @RequestParam(defaultValue = "4") Integer pageSize,
+                            @RequestParam(defaultValue = "null") String desc,
                             @RequestParam(defaultValue = "id") String sortBy) {
-
-        model.addAttribute("products", productService.findAllProduct(pageNo, pageSize, sortBy));
-        model.addAttribute("pageNo", pageNo);
+        if (desc.equals("desc")) {
+            model.addAttribute("products", productService.findAllProductDesc(pageNo, pageSize, sortBy))
+                    .addAttribute("desc", desc);
+        } else {
+            model.addAttribute("products", productService.findAllProduct(pageNo, pageSize, sortBy));
+        }
+        model.addAttribute("pageNo", pageNo)
+                .addAttribute("pageSize", pageSize)
+                .addAttribute("sortBy", sortBy);
         return model;
     }
 
@@ -142,8 +149,7 @@ public class AdminController {
 
     @PostMapping(value = "/update-user",
             produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
-    public String updateUsersAll(UserDto userDto,
-                                 Model model) {
+    public String updateUsersAll(UserDto userDto) {
         userServiceImpl.updateUser(userDto);
         return "redirect:/admin/admin-page";
     }

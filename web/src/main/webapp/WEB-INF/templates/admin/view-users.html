@@ -22,9 +22,9 @@
 </br>
 <div class="row">
     <div th:fragment="language" class="col-md-2 offset-1">
-        <a th:href="@{'/admin/view-users?pageNo=' +${pageNo}+ '&&language=en_US'}"><img width="35" height="20"
+        <a th:href="@{'/admin/view-users?pageNo=' +${pageNo}+ '&language=en_US'}"><img width="35" height="20"
                                                                                         th:src="@{/resources/images/en.jpg}"/></a>
-        <a th:href="@{'/admin/view-users?pageNo=' +${pageNo}+ '&&language=ru_RU'}"><img width="35" height="20"
+        <a th:href="@{'/admin/view-users?pageNo=' +${pageNo}+ '&language=ru_RU'}"><img width="35" height="20"
                                                                                         th:src="@{/resources/images/ru.jpg}"/></a>
     </div>
     <div class="col-md-3 offset-6">
@@ -64,14 +64,7 @@
     </tr>
 </div>
 </div>
-          <span th:if="${pageNo}>0">
-        <a th:href="@{'/admin/view-users?pageNo=' +${pageNo-1}} "><img width="65" height="20"
-                                                                       th:src="@{/resources/images/left.jpg}"/></a>
-         </span>
-<span th:if="${pageNo}>=0">
-         <a th:href="@{'/admin/view-users?pageNo=' +${pageNo+1}} "><img width="65" height="20"
-                                                                        th:src="@{/resources/images/right.jpg}"/></a>
-        </span>
+
     </span>
 </body>
 </html>
