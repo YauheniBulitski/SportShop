@@ -45,6 +45,11 @@ public class ShopController {
         return "redirect:shop";
     }
 
+    @GetMapping("/")
+    public String start(){
+        return "redirect:shop";
+    }
+
     @GetMapping("/shop")
     public String getCategory(Model model, HttpSession session) {
 
