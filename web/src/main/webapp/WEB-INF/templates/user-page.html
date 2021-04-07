@@ -53,7 +53,8 @@
         </a>
         <tr th:each="order : ${orders}">
             <a class="list-group-item list-group-item-success">
-                <span th:text="#{user.number_order}"> <td th:text="${order.id}">id</td></span><br/>
+                <span th:text="#{user.number_order}"></span>
+                <td th:text="${order.id}">id</td><br/>
                 <span th:text="#{user.order_time}"></span>
                 <td th:text="${order.localDate}">data</td>
                 <br/>
