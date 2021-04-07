@@ -106,15 +106,9 @@
             </div>
             </tr>
         </div>
-         <span th:if="${pageNo}>0">
-        <a th:href="@{'/admin/view-product?pageNo=' +${pageNo-1}} "><img width="65" height="20"
-                                                                         th:src="@{/resources/images/left.jpg}"/></a>
-         </span>
-        <span th:if="${pageNo}>=0">
-         <a th:href="@{'/admin/view-product?pageNo=' +${pageNo+1}} "><img width="65" height="20"
-                                                                          th:src="@{/resources/images/right.jpg}"/></a>
-        </span>
+
     </span>
+</div>
 </div>
 </body>
 </html>
