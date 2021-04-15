@@ -72,6 +72,17 @@ public class BaseHelper {
         Category simulators = categoryService.save(Category.builder()
                 .name("Тренажеры").build());
 
+        Type glover=typeService.save(Type.builder().name("Перчатки")
+        .category(sports_wear).build());
+        Type shorts=typeService.save(Type.builder().name("Шорты")
+        .category(sports_wear).build());
+        Type tShirts=typeService.save(Type.builder().name("Майки")
+        .category(sports_wear).build());
+        Type tops=typeService.save(Type.builder().name("Топы")
+                .category(sports_wear).build());
+        Type leggings=typeService.save(Type.builder().name("Леггинсы")
+                .category(sports_wear).build());
+
         Type protein = typeService.save(Type.builder().name("Протеин")
                 .category(sports_nutrition).build());
         Type gainer = typeService.save(Type.builder().name("Гейнер")
@@ -96,6 +107,71 @@ public class BaseHelper {
         Maker trec = makerService.save(Maker.builder().name("Trec Nutrition").country(poland).build());
         Maker strimex = makerService.save(Maker.builder().name("Strimex").country(germany).build());
         Maker alpin = makerService.save(Maker.builder().name("Alpin").country(china).build());
+
+
+        for (int i=0;i<10;i++){
+            countService.save(45,productService.save(Product.builder()
+                    .name("Перчатки женские замшевые черно-фиолетовые X11" +i)
+                    .price(BigDecimal.valueOf(15.25 + i)).maker(trec).type(glover)
+                    .description("Особенность этой модели – наличие на ладони подушки" +
+                            " из вспененного мягкого материла против скольжения, натирания мозолей и обеспечивающая лучший хват")
+                    .url("/resources/images/gloverW.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Перчатки Man’s Power PS-258" +i)
+                    .price(BigDecimal.valueOf(10.25 + i)).maker(alpin).type(glover)
+                    .description("Перчатки для занятий в тренажерном зале вместе с VELVETEX" +
+                            " обеспечивают полную свободу движения и циркуляцию воздуха.")
+                    .url("/resources/images/glover.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Шорты компрессионные черно-розовые M18" +i)
+                    .price(BigDecimal.valueOf(20.50 + i)).maker(alpin).type(shorts)
+                    .description("Шорты для женщин, которые хотят чувствовать себя комфортно и быть сексуальной во время тренировки")
+                    .url("/resources/images/shorts.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("TECH LONG SLEEVE TOP 12" +i)
+                    .price(BigDecimal.valueOf(30.50 + i)).maker(alpin).type(tShirts)
+                    .description("Данный элемент гардероба отлично подойдет для спортивных занятий и повседневной жизни, украсит образ" +
+                            " активного мужчины, который любит находится в движении и при этом чувствовать себя легко и уверенно.")
+                    .url("/resources/images/tShirts.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Топ MINI TOP SUPPLEX 20" +i)
+                    .price(BigDecimal.valueOf(34.60 + i)).maker(strimex).type(tops)
+                    .description("Топ подойдет для фитнеса, бега, танцев, посещения тренажерного зала, велоспорта, командных игр и других спортивных направлений.")
+                    .url("/resources/images/tops.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Лосины LEGGINGS CAMO AW 115" +i)
+                    .price(BigDecimal.valueOf(44.60 + i)).maker(strimex).type(leggings)
+                    .description("Над созданием данной модели работал не только главный дизайнер производителя NEBBIA, но и целая команда бодибилдеров, " +
+                            "поэтому изделие соответствует всем запросам современных атлетов.")
+                    .url("/resources/images/leggings.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Maxler Vita Men (" +i*10+" табл)")
+                    .price(BigDecimal.valueOf(34.20 + i)).maker(strimex).type(vitamins)
+                    .description("Созданный специально для мужчин комплекс ключевых минералов и экзотических фито-добавок VitaMen способствует улучшению умственной" +
+                            " и физической активности, здоровью простаты, снижает негативные последствия стресса и нормализует функцию пищеварительной системы.")
+                    .url("/resources/images/vitamins.png")
+                    .build()));
+
+        }
+
+
+
+
+
+
+
 
         Product p1 = productService.save(Product.builder()
                 .name("TREC NUTRITION BOOSTER WHEY PROTEIN(700ГР)")
