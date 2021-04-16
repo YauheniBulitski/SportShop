@@ -101,6 +101,9 @@ public class BaseHelper {
         Type horizontal_bars = typeService.save(Type.builder().name("Турники")
                 .category(simulators).build());
 
+        Type disc=typeService.save(Type.builder().name("Диски").category(weightlifting).build());
+        Type dumbbell=typeService.save(Type.builder().name("Гантели").category(weightlifting).build());
+        Type barbell=typeService.save(Type.builder().name("Штанги").category(weightlifting).build());
         Country poland = countryService.save(Country.builder().name("Poland").abbreviation("PL").build());
         Country germany = countryService.save(Country.builder().name("Germany").abbreviation("DE").build());
         Country china = countryService.save(Country.builder().name("China").abbreviation("CH").build());
@@ -110,14 +113,6 @@ public class BaseHelper {
 
 
         for (int i=0;i<10;i++){
-            countService.save(45,productService.save(Product.builder()
-                    .name("Перчатки женские замшевые черно-фиолетовые X11" +i)
-                    .price(BigDecimal.valueOf(15.25 + i)).maker(trec).type(glover)
-                    .description("Особенность этой модели – наличие на ладони подушки" +
-                            " из вспененного мягкого материла против скольжения, натирания мозолей и обеспечивающая лучший хват")
-                    .url("/resources/images/gloverW.jpg")
-                    .build()));
-
             countService.save(45,productService.save(Product.builder()
                     .name("Перчатки Man’s Power PS-258" +i)
                     .price(BigDecimal.valueOf(10.25 + i)).maker(alpin).type(glover)
@@ -157,13 +152,44 @@ public class BaseHelper {
                     .build()));
 
             countService.save(45,productService.save(Product.builder()
-                    .name("Maxler Vita Men (" +i*10+" табл)")
+                    .name("Комплекс ViMiLine (" +i*10+" табл)")
                     .price(BigDecimal.valueOf(34.20 + i)).maker(strimex).type(vitamins)
                     .description("Созданный специально для мужчин комплекс ключевых минералов и экзотических фито-добавок VitaMen способствует улучшению умственной" +
                             " и физической активности, здоровью простаты, снижает негативные последствия стресса и нормализует функцию пищеварительной системы.")
-                    .url("/resources/images/vitamins.png")
+                    .url("/resources/images/vitamins.jpg")
                     .build()));
 
+            countService.save(45,productService.save(Product.builder()
+                    .name("Диск обрезиненный KP" +i*10+" кг")
+                    .price(BigDecimal.valueOf(24.20 + i*2)).maker(strimex).type(disc)
+                    .description("Черный, посадочное отверстие d=51 mm. Состав товара: Сталь, резина")
+                    .url("/resources/images/discs.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Штанга OB86" +i)
+                    .price(BigDecimal.valueOf(34.20 + i*2)).maker(alpin).type(barbell)
+                    .description("Гриф (штанга). Хват d=28 mm, посадка d=50mm, замки.")
+                    .url("/resources/images/barbell.jpg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Гантели разборные Lite Weights 2*1" +i+" кг")
+                    .price(BigDecimal.valueOf(38.00 + i*2)).maker(alpin).type(dumbbell)
+                    .description("комплектность: диски (12шт.) наполнитель: цементная смесь\n" +
+                            "материалы: стержень - чугун" +
+                            "покрытие: полипропилен (цвет - черный)" +
+                            "замки: (4шт.)")
+                    .url("/resources/images/dumb.jpeg")
+                    .build()));
+
+            countService.save(45,productService.save(Product.builder()
+                    .name("Турник Absolute Champion 3 треххватный RT"+i)
+                    .price(BigDecimal.valueOf(48.00 + i*2)).maker(alpin).type(horizontal_bars)
+                    .description("Турник для подтягивания различным хватом: прямым широким хватом " +
+                            "и прямым обычным, узким хватом, а также торцевым или обратным хватом.")
+                    .url("/resources/images/bars.jpg")
+                    .build()));
         }
 
 
