@@ -11,7 +11,7 @@ Cтартовая страница->http://localhost:8080/shop
 Есть возможность менять статусы заказов, а также редактировать права доступа у пользователя.
 
 В проекте были использованы технологии: 
-Spring MVC, Spring Data, Spring Security, Spring Validation, Tomcat, база данных H2, Log4j, Aspect
+Spring MVC, Spring Data, Spring Security, Spring Validation, Tomcat, база данных H2, Log4j, Aspect.
 Views - Thymeleaf, CSS, Bootstrap, Jquery.
  
 Пользователи по умолчанию:
